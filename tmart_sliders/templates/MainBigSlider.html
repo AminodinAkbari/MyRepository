@@ -1,0 +1,17 @@
+{% for item in MainSlider %}
+           <div class="slide slider__full--screen slider-height-inherit slider-text-right" style="background: rgba(0, 0, 0, 0) url({{item.image.url}}) no-repeat scroll center center / cover ;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-10 col-lg-8 col-md-offset-2 col-lg-offset-4 col-sm-12 col-xs-12">
+                            <div class="slider__inner">
+                                <h1>{{item.title}} <span class="text--theme"></span></h1>
+                                <p class="rtl">{{item.description}}</p>
+                                <div class="slider__btn">
+                                    <a class="htc__btn" href="cart.html">{{item.button_text}}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+{% endfor %}

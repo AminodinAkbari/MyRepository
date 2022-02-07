@@ -1,0 +1,34 @@
+<!doctype html>
+<html class="no-js" lang="en">
+{% include 'Links/style_and_js.html' %}
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Tmart-Minimalist eCommerce HTML5 Template</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {% include 'Links/style_and_js.html' %}
+
+</head>
+
+{% load settings_tags %}
+{% load settings_tags %}
+<body>
+<!-- Body main wrapper start -->
+<div class="wrapper fixed__footer">
+    <div class="body__overlay"></div>
+    <!-- Start Header Style -->
+    {% navbar %}  
+    <!-- End Header Style -->
+    {% block content %}
+
+    {% endblock %}
+
+    <!-- Start Footer Area -->
+    {% footer %}
+    <!-- End Footer Area -->
+</div>
+{% include 'Links/Js.html' %}
+</body>
