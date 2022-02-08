@@ -1,0 +1,29 @@
+{% include 'links/style_and_js.html' %}
+{% load settings_tags %}
+{% navbar %}
+<hr>
+<div class="container">
+    <div class="col-lg-4 col-lg-offset-4">
+        <ul class="login__register__menu">
+            <li class="register"><a>ورود</a></li>
+        </ul>
+        <div id="register" class="">
+                <form class="login" method="post">
+                    {% csrf_token %}
+                    {{login_form.username}}
+                    {{login_form.password}}
+                        <br>
+                        {% for error in login_form.username.errors %}
+                           <p class="text-danger p-3">{{error}}</p>
+                        {% endfor %}
+                        <br>        
+                                    
+                            <div class="htc__login__btn">
+                                <button type="submit">ثبت نام</button>
+                            </div>
+
+                </form>
+        </div>
+
+    </div>
+</div>
