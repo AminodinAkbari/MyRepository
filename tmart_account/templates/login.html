@@ -1,6 +1,6 @@
 {% include 'links/style_and_js.html' %}
 {% load settings_tags %}
-{% navbar %}
+{% navbar request %}
 <hr>
 <div class="container">
     <div class="col-lg-4 col-lg-offset-4">
@@ -17,10 +17,13 @@
                            <p class="text-danger p-3">{{error}}</p>
                         {% endfor %}
                         <br>        
-                                    
+                                <p class="rtl">حساب کاربری ندارید ؟ <a href="/register">از همین لینک ایجاد کنید</a></p>
+                        <br>
+
                             <div class="htc__login__btn">
                                 <button type="submit">ثبت نام</button>
                             </div>
+
 
                 </form>
         </div>

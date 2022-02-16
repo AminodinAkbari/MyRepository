@@ -12,7 +12,7 @@ def login_view(request):
 	if login_form.is_valid():
 		username = login_form.cleaned_data.get('username')
 		password = login_form.cleaned_data.get('password')
-		user = authenticate(request , username = username , password = password)
+		user = authenticate(request ,username = username , password = password)
 		if user is not None:
 			login(request , user)
 			return redirect('/')
@@ -29,9 +29,14 @@ def register(request):
 		first_name = register_form.cleaned_data.get('first_name')
 		last_name  = register_form.cleaned_data.get('last_name')
 		User.objects.create_user(username = username , password = password , first_name = first_name , last_name = last_name)
-		user = authenticate(request , username = username , password = password)
+		user = authenticate(username = username , password = password)
 		if user is not None:
 			login(request,user)
 			return redirect('/')
 
 	return render(request , 'register.html' , {'register_form':register_form})
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('/')

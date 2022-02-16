@@ -1,0 +1,32 @@
+<div class="col-md-4 single__pro col-lg-4 cat--1 col-sm-4 col-xs-12">
+        <div class="product">
+            <div class="product__inner">
+                    <div class="pro__thumb">
+                        <a href="#">
+                            <img src="{{item.image.url}}" alt="product images">
+                        </a>
+                    </div>
+            <div class="product__hover__info">
+                <ul class="product__action">
+                    <li><a data-toggle="modal" data-target="#productModal{{item.id}}" title="Quick View" class="quick-view modal-view detail-link" href="#"><span class="ti-plus"></span></a></li>
+                    <li><a title="Add TO Cart" href="cart.html"><span class="ti-shopping-cart"></span></a></li>
+                    <li><a title="Wishlist" href="wishlist.html"><span class="ti-heart"></span></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="product__details">
+            <h2><a href="product-details.html">{{item.title|truncatewords:6}}</a></h2>
+                {% if item.discount > 0 %}
+            <ul class="product__price">
+                <li class="old__price">{{item.price}}</li>
+                <li class="new__price">{{item.price_with_discount}}</li>
+            </ul>
+                {% else %}
+            <ul class="product__price">
+                <li class="new__price">{{item.price}}</li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+
+

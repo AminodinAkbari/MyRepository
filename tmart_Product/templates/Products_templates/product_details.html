@@ -1,5 +1,7 @@
 {% extends 'Base.html' %}
 {% load static %}
+{% load ratings %}
+
 {% block content %}
 <!--<div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url({% static 'tmart/images/bg/2.jpg' %}) no-repeat scroll center center / cover ;">
     <div class="ht__bradcaump__wrap">
@@ -40,7 +42,7 @@
                     <div class="product__big__images">
                         <div class="portfolio-full-image tab-content">
                             <div role="tabpanel" class="tab-pane fade in active product-video-position" id="img-tab-2">
-                                <img src="{{object.image.url}}" width="590" height="440" alt="full-image">
+                                <img src="{{object.image.url}}" width="590" alt="full-image">
                                 <div class="product-video">
                                     <!-- <a class="video-popup" href="https://www.youtube.com/watch?v=cDDWvj_q-o8">
                                         <i class="zmdi zmdi-videocam"></i> View Video
@@ -75,14 +77,15 @@
                         <h2>{{object.title}}</h2>
                     </div>
                     <div class="pro__dtl__rating">
-                        <ul class="pro__rating">
+                        <!--<ul class="pro__rating">
                             <li><span class="ti-star"></span></li>
                             <li><span class="ti-star"></span></li>
                             <li><span class="ti-star"></span></li>
                             <li><span class="ti-star"></span></li>
                             <li><span class="ti-star"></span></li>
                         </ul>
-                        <span class="rat__qun">(Based on 0 Ratings)</span>
+                        <span class="rat__qun">(Based on 0 Ratings)</span>-->
+                        {{start_rating.count}}
                     </div>
                     <div class="pro__details">
                         <p class="text-right">{{object.description | safe}}</p>
@@ -154,13 +157,15 @@
             <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                 <ul class="product__deatils__tab mb--60" role="tablist">
                     <li role="presentation" class="active">
-                        <a href="#description" role="tab" data-toggle="tab">Description</a>
+                        <a href="#description" role="tab" data-toggle="tab">توضیحات</a>
                     </li>
+                    {% if item.featuers is not None %}
                     <li role="presentation">
-                        <a href="#sheet" role="tab" data-toggle="tab">Data sheet</a>
+                        <a href="#sheet" role="tab" data-toggle="tab">ویژگی ها</a>
                     </li>
+                    {% endif %}
                     <li role="presentation">
-                        <a href="#reviews" role="tab" data-toggle="tab">Reviews</a>
+                        <a href="#reviews" role="tab" data-toggle="tab">نظرات</a>
                     </li>
                 </ul>
             </div>
@@ -206,13 +211,14 @@
                         <div class="review__address__inner">
                             <!-- Start Single Review -->
                             <div class="pro__review">
-                                <div class="review__thumb">
+                                <!--<div class="review__thumb">
                                     <img src="{% static 'tmart/images/review/1.jpg' %}" alt="review images">
-                                </div>
-                                <div class="review__details">
+                                </div>-->
+                                {% for review in all_reviews %}
+                                <div class="review__details rtl">
                                     <div class="review__info">
-                                        <h4><a href="#">Gerald Barnes</a></h4>
-                                        <ul class="rating">
+                                        <h4><a>{{review.user.first_name}}</a></h4>
+                                        <!--<ul class="rating">
                                             <li><i class="zmdi zmdi-star"></i></li>
                                             <li><i class="zmdi zmdi-star"></i></li>
                                             <li><i class="zmdi zmdi-star"></i></li>
@@ -222,17 +228,20 @@
                                         <div class="rating__send">
                                             <a href="#"><i class="zmdi zmdi-mail-reply"></i></a>
                                             <a href="#"><i class="zmdi zmdi-close"></i></a>
-                                        </div>
+                                        </div>-->
                                     </div>
                                     <div class="review__date">
-                                        <span>27 Jun, 2016 at 2:30pm</span>
+                                        <span>{{review.create_at}}</span>
                                     </div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan egestas elese ifend. Phasellus a felis at estei to bibendum feugiat ut eget eni Praesent et messages in con sectetur posuere dolor non.</p>
+                                    <p>{{review.comment}}</p>
                                 </div>
+                                <hr>
+                                {% endfor %}
                             </div>
+                            <hr>
                             <!-- End Single Review -->
                             <!-- Start Single Review -->
-                            <div class="pro__review ans">
+                            <!--<div class="pro__review ans">
                                 <div class="review__thumb">
                                     <img src="{% static 'tmart/images/review/2.jpg' %}" alt="review images">
                                 </div>
@@ -256,69 +265,34 @@
                                     </div>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan egestas elese ifend. Phasellus a felis at estei to bibendum feugiat ut eget eni Praesent et messages in con sectetur posuere dolor non.</p>
                                 </div>
-                            </div>
+                            </div>-->
                             <!-- End Single Review -->
                         </div>
                         <!-- Start RAting Area -->
-                        <div class="rating__wrap">
-                            <h2 class="rating-title">Write  A review</h2>
-                            <h4 class="rating-title-2">Your Rating</h4>
+                        <div class="rating__wrap rtl">
+                            <h4 class="rating-title">لطفا نظر خود را وارد کنید</h4><br>
+                            <h5 class="rating-title-2">امتیاز شما به این محصول</h5><br>
                             <div class="rating__list">
-                                <!-- Start Single List -->
-                                <ul class="rating">
-                                    <li><i class="zmdi zmdi-star-half"></i></li>
-                                </ul>
-                                <!-- End Single List -->
-                                <!-- Start Single List -->
-                                <ul class="rating">
-                                    <li><i class="zmdi zmdi-star-half"></i></li>
-                                    <li><i class="zmdi zmdi-star-half"></i></li>
-                                </ul>
-                                <!-- End Single List -->
-                                <!-- Start Single List -->
-                                <ul class="rating">
-                                    <li><i class="zmdi zmdi-star-half"></i></li>
-                                    <li><i class="zmdi zmdi-star-half"></i></li>
-                                    <li><i class="zmdi zmdi-star-half"></i></li>
-                                </ul>
-                                <!-- End Single List -->
-                                <!-- Start Single List -->
-                                <ul class="rating">
-                                    <li><i class="zmdi zmdi-star-half"></i></li>
-                                    <li><i class="zmdi zmdi-star-half"></i></li>
-                                    <li><i class="zmdi zmdi-star-half"></i></li>
-                                    <li><i class="zmdi zmdi-star-half"></i></li>
-                                </ul>
-                                <!-- End Single List -->
-                                <!-- Start Single List -->
-                                <ul class="rating">
-                                    <li><i class="zmdi zmdi-star-half"></i></li>
-                                    <li><i class="zmdi zmdi-star-half"></i></li>
-                                    <li><i class="zmdi zmdi-star-half"></i></li>
-                                    <li><i class="zmdi zmdi-star-half"></i></li>
-                                    <li><i class="zmdi zmdi-star-half"></i></li>
-                                </ul>
-                                <!-- End Single List -->
+                                {% ratings object %}
                             </div>
                         </div>
                         <!-- End RAting Area -->
-                        <div class="review__box">
-                            <form id="review-form">
-                                <div class="single-review-form">
-                                    <div class="review-box name">
-                                        <input type="text" placeholder="Type your name">
-                                        <input type="email" placeholder="Type your email">
+                        <div class="review__box rtl">
+                            {% if review_form %}
+                                <form id="review-form" method="POST">
+                                    <div class="single-review-form">
+                                        <div class="review-box name">
+                                            {% csrf_token %}
+                                            {{review_form.comment}}
+                                            <!--<input type="email" placeholder="Type your email">-->
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="single-review-form">
-                                    <div class="review-box message">
-                                        <textarea placeholder="Write your review"></textarea>
+                                    
+                                    <div class="review-btn">
+                                        <button class="fv-btn" type="submit">ثبت دیدگاه</button>
                                     </div>
-                                </div>
-                                <div class="review-btn">
-                                    <a class="fv-btn" href="#">submit review</a>
-                                </div>
-                            </form>                                
+                                </form>   
+                            {% endif %}                             
                         </div>
                     </div>
                     <!-- End Single Content -->

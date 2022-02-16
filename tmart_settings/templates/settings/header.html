@@ -118,10 +118,27 @@
                         <!-- End MAinmenu Ares -->
                         <div class="col-md-2 col-sm-4 col-xs-3">  
                             <ul class="menu-extra">
-                                <li class="search search__open hidden-xs"><span class="ti-search"></span></li>
-                                <li><a href="login-register.html"><span class="ti-user"></span></a></li>
-                                <li class="cart__menu"><span class="ti-shopping-cart"></span></li>
-                                <li class="toggle__menu hidden-xs hidden-sm"><span class="ti-menu"></span></li>
+                                <li class="search search__open hidden-xs"><a href=""><span class="ti-search"></span></a></li>
+                                <li>
+                                <ul class="main__menu">
+                                    <li class="drop"><span class="ti-user"></span>
+                                        <ul class="dropdown">
+                                            {% if request.user.is_authenticated %}
+                                                <li class="text-center">{{request.user.get_full_name}}</li>
+                                                <li><a href="">پنل کاربری</a></li>
+                                                <li><a href="/logout">خروج از حساب کاربری</a></li>
+                                            {% else %}
+                                                <li><a href="/login">ورود / ثبت نام</a></li>
+                                            {% endif %}
+                                            
+                                        </ul>
+                                    </li>
+                                </ul>
+                                </li>
+                                
+                                
+                                <li class="cart__menu"><a href=""><span class="ti-shopping-cart"></span></a></li>
+                                <li class="toggle__menu hidden-xs hidden-sm"><a><span class="ti-menu"></span></a></li>
                             </ul>
                         </div>
                     </div>
@@ -139,7 +156,7 @@
                         <div class="col-md-12" >
                             <div class="search__inner">
                                 <form action="/search" method="get">
-                                    <input placeholder="Search here... " type="text" name='q' value="{{request.GET.q}}">
+                                    <input placeholder="به دنبال چه چیزی هستید ؟" type="text" name='q' value="{{request.GET.q}}" class="rtl">
                                     <button type="submit"></button>
                                 </form>
                                 <div class="search__close__btn">

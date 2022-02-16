@@ -11,9 +11,13 @@ class ProductModelAdmin(admin.ModelAdmin):
 class ColorsAdmin(admin.ModelAdmin):
     list_display = ['__str__','color_tag','code']
 
+class ReviewAdmin(admin.ModelAdmin):
+    list_display = ['__str__','status']
+
 admin.site.register(Category)
 admin.site.register(SubCategory)
 admin.site.register(Set)
 admin.site.register(Tags)
 admin.site.register(SingleProduct,ProductModelAdmin)
 admin.site.register(Colors,ColorsAdmin)
+admin.site.register(Review,ReviewAdmin)

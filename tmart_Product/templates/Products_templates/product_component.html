@@ -1,0 +1,87 @@
+{% load ratings %}                 
+                            <div class="col-md-3 single__pro col-lg-3 cat--1 col-sm-4 col-xs-12">
+                                <div class="product foo">
+                                    <div class="product__inner">
+                                        <div class="pro__thumb">
+                                            <a href="#">
+                                                <img src="{{item.image.url}}" alt="product images" height="250px">
+                                            </a>
+                                        </div>
+                                        <div class="product__hover__info">
+                                            <ul class="product__action">
+                                                <li><a data-toggle="modal" data-target="#productModal{{item.id}}" title="Quick View" class="quick-view modal-view detail-link" href="#"><span class="ti-plus"></span></a></li>
+                                                <li><a title="Add TO Cart" href="cart.html"><span class="ti-shopping-cart"></span></a></li>
+                                                <li><a title="Wishlist" href="wishlist.html"><span class="ti-heart"></span></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="product__details">
+                                        {% ratings item %}
+                                        <h2 class="rtl"><a href="/product_details/{{item.slug}}">{{item.title | truncatewords:5}}</a></h2>
+
+                                        <ul class="product__price">
+                                            <li class="old__price">{{item.price_with_discount}}</li>
+                                            <li class="new__price">{{item.price}}</li>
+                                        </ul>
+
+                                    </div>
+                                </div>
+                            </div>
+
+<div id="quickview-wrapper">
+        <!-- Modal -->
+        <div class="modal fade" id="productModal{{item.id}}" tabindex="-1" >
+            <div class="modal-dialog modal__container" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="modal-product">
+                            <!-- Start product images -->
+                            <div class="product-images">
+                                <div class="main-image images">
+                                    <img alt="big images" src="{{item.image.url}}" width="600px">
+                                </div>
+                            </div>
+                            <!-- end product images -->
+                            <div class="product-info">
+                                <h1 class="rtl text-center">{{item.title}}</h1>
+                                <div class="rating__and__review">
+                                    {% ratings item %}
+                                    <!--<ul class="rating">
+                                        <li><span class="ti-star"></span></li>
+                                        <li><span class="ti-star"></span></li>
+                                        <li><span class="ti-star"></span></li>
+                                        <li><span class="ti-star"></span></li>
+                                        <li><span class="ti-star"></span></li>
+                                    </ul>
+                                    <div class="review">
+                                        <a href="#">4 customer reviews</a>
+                                    </div>-->
+
+                                </div>
+                                <div class="price-box-3">
+                                    <div class="s-price-box">
+                                        <span class="new-price">{{item.price_with_discount}}</span>
+                                        <span class="old-price">{{item.price}}</span>
+                                    </div>
+                                </div>
+                                <div class="quick-desc">
+                                    {{item.description|safe|truncatewords:35}}
+                                    <hr>
+                                    متن کامل در صفحه محصول قابل مشاهده است
+                                </div>
+
+                                <div class="addtocart-btn">
+                                    <a href="/product_details/{{item.slug}}">مشاهده با جزئیات کامل</a>
+                                </div>
+                            </div><!-- .product-info -->
+                        </div><!-- .modal-product -->
+                    </div><!-- .modal-body -->
+                </div><!-- .modal-content -->
+            </div><!-- .modal-dialog -->
+        </div>
+        <!-- END Modal -->
+    </div>

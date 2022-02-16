@@ -48,6 +48,7 @@ INSTALLED_APPS = [
 
     #pip
     'ckeditor',
+    'star_ratings',
 ]
 
 MIDDLEWARE = [
@@ -143,3 +144,5 @@ STATICFILES_DIRS = [
 STATIC_ROOT = BASE_DIR/"static/static_root"
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR/"static/product_images/"
+
+STAR_RATINGS_STAR_HEIGHT = 15

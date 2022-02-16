@@ -23,7 +23,8 @@ from tmart_Product.views import AllProducts
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home),
-    path('all', AllProducts.as_view()),
+    path('ratings/', include('star_ratings.urls', namespace='ratings')),
+    path('all', AllProducts.as_view() , name = 'all'),
     path('', include('tmart_Product.urls')),
     path('', include('tmart_account.urls')),
 ]

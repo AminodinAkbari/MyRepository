@@ -5,6 +5,7 @@ from ckeditor.fields import RichTextField
 from django.db.models.signals import pre_save
 from tmart.utils import unique_slug_generator
 from django.utils.html import format_html
+from django.contrib.auth.models import User
 
 from tmart_settings.models import IPs
 # Create your models here.
@@ -13,7 +14,7 @@ class ProductManager(models.Manager):
     def search(self,query):
             lookup = (
             Q(title__icontains=query) | 
-            Q(set__title__icontains=query) |
+            Q(set__title_fa__icontains=query) |
             Q(tags__name__icontains=query)
             )
             return self.get_queryset().filter(lookup).distinct()
@@ -34,10 +35,11 @@ class SubCategory(models.Model):
 
 class Set(models.Model):
     subcategory = models.ForeignKey(SubCategory , on_delete=models.CASCADE , null=True , blank=True, related_name="set")
-    title = models.CharField(max_length=100)
+    title_fa = models.CharField(max_length=100)
+    title_en = models.CharField(max_length=100 , blank = True , null = True)
 
     def __str__(self) :
-        return self.title
+        return self.title_fa
 
 class Tags(models.Model):
     name = models.CharField(max_length=100)
@@ -58,19 +60,19 @@ class Colors(models.Model):
         return self.name
 
 class SingleProduct(models.Model):
-    set = models.ForeignKey(Set , on_delete=models.CASCADE)
-    title = models.CharField(max_length=250)
-    description = RichTextField()
+    set = models.ForeignKey(Set , on_delete=models.CASCADE,blank = True , null = True)
+    title = models.CharField(max_length=250 , blank = True , null = True)
+    description = RichTextField(blank = True , null = True)
     features = models.TextField(blank = True , null = True)
-    image = models.ImageField(null = True,blank = True,upload_to = 'SingleProducts_Cover/')
-    slug = models.SlugField(max_length=100,unique=True,blank=True,allow_unicode=True)
-    price = models.IntegerField(default=0)
-    tags = models.ManyToManyField(Tags)
+    image = models.ImageField(null = True,blank = True,upload_to = 'SingleProducts_Cover/' , default = 'static/product_images/category_1.jpg')
+    slug = models.SlugField(max_length=100,unique=True,blank=True,allow_unicode=True , null=True)
+    price = models.IntegerField(default=0,blank = True , null = True)
+    tags = models.ManyToManyField(Tags,blank = True)
     colors = models.ManyToManyField(Colors , blank=True)
-    discount = models.IntegerField(default='0')
+    discount = models.IntegerField(default='0',blank = True , null = True)
     count = models.IntegerField(default=0)
-    available = models.BooleanField()
-    hits = models.ManyToManyField(IPs , blank=True)
+    available = models.BooleanField(default = False)
+    hits = models.ManyToManyField(IPs , blank=True )
     objects = ProductManager()
 
 
@@ -94,3 +96,18 @@ class singleProductGallery(models.Model):
 
     def __str__(self) :
         return self.name
+
+class Review(models.Model):
+    STATUS= (
+    ('wating_for_published','در انتظار تایید'),
+    ('True' , 'تایید شده'),
+    ('False', 'تایید نشده')
+    )
+    product = models.ForeignKey(SingleProduct,on_delete = models.CASCADE)
+    user    = models.ForeignKey(User,on_delete = models.CASCADE)
+    comment = models.TextField()
+    status  = models.CharField(max_length=20,choices=STATUS,default='wating_for_published')
+    create_at= models.DateField(auto_now_add = True)
+
+    def __str__(self) :
+        return self.user.first_name
