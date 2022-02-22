@@ -1,8 +1,9 @@
 {% extends 'Base.html' %}
 {% load static %}
 {% load ratings %}
-
+{% load sliders_tags %}
 {% block content %}
+
 <!--<div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url({% static 'tmart/images/bg/2.jpg' %}) no-repeat scroll center center / cover ;">
     <div class="ht__bradcaump__wrap">
         <div class="container">
@@ -94,8 +95,7 @@
                         <li class="old__prize">{{object.price}}</li>
                         <li>{{object.price_with_discount}} تومان</li>
                     </ul>
-                    {% if object.colors.all %}
-                        <div class="pro__dtl__color">
+                    
                             <!--<h2 class="title__5">Choose Colour</h2>
                             <ul class="pro__choose__color">
                                 <li class="red"><a href="#"><i class="zmdi zmdi-circle"></i></a></li>
@@ -103,17 +103,9 @@
                                 <li class="perpal"><a href="#"><i class="zmdi zmdi-circle"></i></a></li>
                                 <li class="yellow"><a href="#"><i class="zmdi zmdi-circle"></i></a></li>
                             </ul>-->  
-                            <label class="title__5" for="colors"><h6 class="rtl">رنگ های موجود :</h6></label>
-                            <select name="cars" id="colors">
-                            {% for color in object.colors.all %}
+                            
 
-                              <option value="{{color.name}}">{{color.name}}</option>
-
-                            {% endfor %}
-                            </select>
-
-                        </div>
-                    {% endif %}
+                        
                     <!--<div class="pro__dtl__size">
                         <h2 class="title__5">Size</h2>
                         <ul class="pro__choose__size">
@@ -125,22 +117,41 @@
                         </ul>
                     </div>-->
                     <div class="product-action-wrap">
+                        <form id='myform' enctype='multipart/form-data' method='POST' action='/add_to_order_detail/{{object.slug}}'>
+                            {% csrf_token %}
+                                {% if object.colors.all %}
+                                    <div class="pro__dtl__color">
+                                        <label class="title__5" for="colors"><h6 class="rtl">رنگ های موجود :</h6></label>
+                                        <select name="color" id="color">
+                                        {% for color in object.colors.all %}
+
+                                          <option name='color' value="{{color.name}}">{{color.name}}</option>
+
+                                        {% endfor %}
+                                        </select>
+                                    </div>
+                                {% endif %}
+
                         <div class="prodict-statas"><span>تعداد</span></div>
                         <div class="product-quantity">
-                            <form id='myform' method='POST' action='#'>
                                 <div class="product-quantity">
                                     <div class="cart-plus-minus">
-                                        <input class="cart-plus-minus-box" type="text" name="qtybutton" value="1">
+
+                            <input class="cart-plus-minus-box" name="qtybutton" value="1"><hr>
+
                                     </div>
-                                </div>
-                            </form>
-                        </div>
+                                </div>   
+                            </div>
+
+                        <ul class="pro__dtl__btn">
+                            <li class="buy__now__btn"><button type="submit">افزودن به سبد خرید</button></li>
+                            <li><a href="#"><span class="ti-heart"></span></a></li>
+                            <li><a href="#"><span class="ti-email"></span></a></li>
+                        </ul>
+
+                        </form>
                     </div>
-                    <ul class="pro__dtl__btn">
-                        <li class="buy__now__btn"><a href="#">افزودن به سبد خرید</a></li>
-                        <li><a href="#"><span class="ti-heart"></span></a></li>
-                        <li><a href="#"><span class="ti-email"></span></a></li>
-                    </ul>
+        
                     <div class="pro__social__share">
                         <h6 class="rtl">قیمت ارزان تر سراغ دارید ؟ <a>اطلاع دهید</a></h6>
                     </div>
@@ -150,6 +161,35 @@
     </div>
 </section>
 <!-- End Product Details -->
+{% if related.count > 2 %}
+{% related_products related %}
+{% else %}
+<section class=" bg__white">
+    <div class="container ">
+        <h5 class="rtl">محصولات مرتبط</h5>
+        <hr>
+        <div class="row">
+            <div class="col-md-3">
+                        <div class="product-categories-all">
+                            <div class="product-categories-title">
+                                <h3>{{category.name}}</h3>
+                            </div>
+                            <div class="product-categories-menu">
+                                <ul>
+                                    {% for subcategory in category.subcategory.all %}
+                                    <li><a href="#">{{subcategory.title}}</a></li>
+                                    {%endfor%}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+            {% for item in related %}
+                {% include 'Products_templates/product_component.html' %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
 <!-- Start Product tab -->
 <section class="htc__product__details__tab bg__white pb--120">
     <div class="container">

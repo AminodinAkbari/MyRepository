@@ -352,7 +352,7 @@ $('.fixed__footer').css({'margin-bottom': $newsletter_height.height() + 'px'});
 
 
   $('.product-slider-active').owlCarousel({
-      loop: true,
+      loop: false,
       margin:0,
       nav:true,
       navText: [ '<i class="zmdi zmdi-chevron-left"></i>', '<i class="zmdi zmdi-chevron-right"></i>' ],

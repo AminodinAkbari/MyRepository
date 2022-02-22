@@ -27,6 +27,7 @@ urlpatterns = [
     path('all', AllProducts.as_view() , name = 'all'),
     path('', include('tmart_Product.urls')),
     path('', include('tmart_account.urls')),
+    path('', include('tmart_Cart_and_Favorite.urls')),
 ]
 
 if settings.DEBUG:

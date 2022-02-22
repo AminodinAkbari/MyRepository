@@ -18,6 +18,11 @@ class ProductManager(models.Manager):
             Q(tags__name__icontains=query)
             )
             return self.get_queryset().filter(lookup).distinct()
+            
+    def get_by_slug(self,slug):
+        qs = SingleProduct.objects.get_queryset().filter(slug=slug)
+        if qs.count()==1:
+            return qs.first()
 
 class Category(models.Model):
     name = models.CharField(max_length=100 , verbose_name='نام دسته بندی')
@@ -73,6 +78,7 @@ class SingleProduct(models.Model):
     count = models.IntegerField(default=0)
     available = models.BooleanField(default = False)
     hits = models.ManyToManyField(IPs , blank=True )
+    hot_offer = models.BooleanField(default = False)
     objects = ProductManager()
 
 
@@ -83,6 +89,8 @@ class SingleProduct(models.Model):
 
     def price_with_discount(self):
         return self.price - self.discount
+
+
 
 def product_presave_receiver(sender,instance,*args,**kwargs):
     if not instance.slug:

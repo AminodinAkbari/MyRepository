@@ -22,6 +22,10 @@ def login_view(request):
 
 
 def register(request):
+	
+	if request.user.is_authenticated:
+		return redirect('/')
+
 	register_form = RegisterForm(request.POST or None)
 	if register_form.is_valid():
 		username = register_form.cleaned_data.get('phone')

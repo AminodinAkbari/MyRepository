@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'tmart_sliders',
     'tmart_settings',
     'tmart_account',
+    'tmart_Cart_and_Favorite',
 
 
     #pip

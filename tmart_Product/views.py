@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.views.generic import ListView , DetailView
-from .models import SingleProduct , singleProductGallery ,IPs ,Set,Review
+from .models import SingleProduct , singleProductGallery ,IPs ,Set,Review , Category
 from .forms import ReviewForm
+
 # Create your views here.
 
 class AllProducts(ListView):
@@ -32,7 +33,9 @@ class ProductSearch(ListView):
         
 def product_detail(request , slug):
     qs = SingleProduct.objects.get(slug = slug)
+    category = Category.objects.get(subcategory__set__singleproduct = qs)
     gallery = singleProductGallery.objects.filter(product=qs)
+    related = SingleProduct.objects.filter(tags__singleproduct = qs).exclude(id = qs.id).distinct()[:10]
     ip = request.user.ip_address
     if qs.features:
         features = qs.features.split(',')
@@ -52,5 +55,13 @@ def product_detail(request , slug):
 
     all_reviews = Review.objects.filter(product = qs)
 
-    context = {'object' : qs , 'gallery' : gallery , 'features':features , 'review_form':review_form , 'all_reviews':all_reviews }
+    context = {
+    'object' : qs , 
+    'gallery' : gallery , 
+    'features':features , 
+    'review_form':review_form ,
+    'all_reviews':all_reviews,
+    'related':related,
+    'category':category,
+    }
     return render(request , 'Products_templates/product_details.html' , context)

@@ -1,6 +1,6 @@
                     <div id="quickview-wrapper">
         <!-- Modal -->
-        <div class="modal fade" id="productModal" tabindex="-1" role="dialog">
+        <div class="modal fade" id="productModal{{item.id}}" tabindex="-1" role="dialog">
             <div class="modal-dialog modal__container" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -16,31 +16,19 @@
                             </div>
                             <!-- end product images -->
                             <div class="product-info">
-                                <h1>{{item.title}}</h1>
-                                <div class="rating__and__review">
-                                    <ul class="rating">
-                                        <li><span class="ti-star"></span></li>
-                                        <li><span class="ti-star"></span></li>
-                                        <li><span class="ti-star"></span></li>
-                                        <li><span class="ti-star"></span></li>
-                                        <li><span class="ti-star"></span></li>
-                                    </ul>
-                                    <div class="review">
-                                        <a href="#">4 customer reviews</a>
-                                    </div>
-                                </div>
+                                <h1 class="rtl">{{item.title}}</h1>
                                 <div class="price-box-3">
                                     <div class="s-price-box">
                                         <span class="new-price">{{item.price_with_discount}}</span>
                                         <span class="old-price">{{item.price}}</span>
                                     </div>
                                 </div>
-                                <div class="quick-desc">
-                                    {{item.description|safe|truncatewords:35}}
+                                <div class="quick-desc rtl">
+                                    {{item.description|truncatewords:25|safe}}
                                 </div>
 
                                 <div class="addtocart-btn">
-                                    <a href="">مشاهده با جزئیات کامل</a>
+                                    <a href="/product_details/{{item.slug}}">مشاهده با جزئیات کامل</a>
                                 </div>
                             </div><!-- .product-info -->
                         </div><!-- .modal-product -->
