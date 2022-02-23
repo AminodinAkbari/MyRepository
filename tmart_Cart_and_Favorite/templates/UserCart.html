@@ -1,0 +1,79 @@
+{% extends 'Base.html' %}
+{% block content %}
+
+<div class="cart-main-area ptb--120 bg__white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <form action="#">               
+                            <div class="table-content table-responsive">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th class="product-thumbnail">تصویر محصول</th>
+                                            <th class="product-name">نام محصول</th>
+                                            <th class="product-price">قیمت</th>
+                                            <th class="product-quantity">تعداد</th>
+                                            <th class="product-subtotal">قیمت کل</th>
+                                            <th class="product-remove">حذف از سبد</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    	{% for item in qs %}
+                                        <tr>
+                                            <td class="product-thumbnail"><a href="#"><img src="{{item.product.image.url}}" alt="product img"></a></td>
+                                            <td class="product-name"><a href="{{item.product.get_absolute_url}}">{{item.product.title}}</a></td>
+                                            <td class="product-price"><span class="amount">{{item.price}}</span></td>
+                                            <td class="product-quantity"><h5>{{item.count}}</h5></td>
+                                            <td class="product-subtotal">{{item.get_total_price}}</td>
+                                            <td class="product-remove"><a href="remove_item_fromcart/{{item.id}}">X</a></td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8 col-sm-7 col-xs-12">
+        
+                                    <div class="coupon">
+                                        <h3>کد تخفیف</h3>
+                                        <p>اگر کد تخفیف دارید ، در این قسمت وارد کنید</p>
+                                        <input type="text" placeholder="کد کوپن">
+                                        <input type="submit" value="اعمال کوپن">
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4 col-sm-5 col-xs-12">
+                                    <div class="cart_totals">
+                                        <h2>Cart Totals</h2>
+                                        <table>
+                                            <tbody>
+                                                
+                                                <tr class="shipping">
+                                                    <th>Shipping</th>
+                                                    <td>
+                                                        
+                                                        <p><a class="shipping-calculator-button" href="#">Calculate Shipping</a></p>
+                                                    </td>
+                                                </tr>
+                                                <tr class="order-total">
+                                                    <th>Total</th>
+                                                    <td>
+                                                        <strong><span class="amount">£215.00</span></strong>
+                                                    </td>
+                                                </tr>                                           
+                                            </tbody>
+                                        </table>
+                                        <div class="wc-proceed-to-checkout">
+                                            <a href="checkout.html">Proceed to Checkout</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form> 
+                    </div>
+                </div>
+            </div>
+        </div>
+
+{% endblock %}
