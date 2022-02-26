@@ -5,7 +5,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12">
-                        <form action="#">               
+                                       
                             <div class="table-content table-responsive">
                                 <table>
                                     <thead>
@@ -22,7 +22,7 @@
                                     	{% for item in qs %}
                                         <tr>
                                             <td class="product-thumbnail"><a href="#"><img src="{{item.product.image.url}}" alt="product img"></a></td>
-                                            <td class="product-name"><a href="{{item.product.get_absolute_url}}">{{item.product.title}}</a></td>
+                                            <td class="product-name rtl"><a href="{{item.product.get_absolute_url}}">{{item.product.title}}</a></td>
                                             <td class="product-price"><span class="amount">{{item.price}}</span></td>
                                             <td class="product-quantity"><h5>{{item.count}}</h5></td>
                                             <td class="product-subtotal">{{item.get_total_price}}</td>
@@ -38,28 +38,31 @@
                                     <div class="coupon">
                                         <h3>کد تخفیف</h3>
                                         <p>اگر کد تخفیف دارید ، در این قسمت وارد کنید</p>
-                                        <input type="text" placeholder="کد کوپن">
-                                        <input type="submit" value="اعمال کوپن">
+                                        <form action="Cart" method="POST" >
+                                            {% csrf_token %}
+                                        {{form.code}}
+                                        <button type="submit" class="btn">اعمال کد تخفیف</button>
+                                        </form>
                                     </div>
 
                                 </div>
-                                <div class="col-md-4 col-sm-5 col-xs-12">
+                                <div class="col-md-4 col-sm-5 col-xs-12 rtl">
                                     <div class="cart_totals">
-                                        <h2>Cart Totals</h2>
+                                        <h2>ارزش سبد خرید شما</h2>
                                         <table>
-                                            <tbody>
+                                            <tbody class="">
                                                 
                                                 <tr class="shipping">
-                                                    <th>Shipping</th>
+                                                    
                                                     <td>
                                                         
-                                                        <p><a class="shipping-calculator-button" href="#">Calculate Shipping</a></p>
+                                                        <p><a class="shipping-calculator-button" href="#">هزینه حمل و نقل رایگان برای خرید بالای 200 هزار تومان</a></p>
                                                     </td>
                                                 </tr>
                                                 <tr class="order-total">
-                                                    <th>Total</th>
+                                                    <th>جمع</th>
                                                     <td>
-                                                        <strong><span class="amount">£215.00</span></strong>
+                                                        <strong><span class="amount">{{open_order.get_total_price}}</span></strong>
                                                     </td>
                                                 </tr>                                           
                                             </tbody>
@@ -70,7 +73,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </form> 
+                         
                     </div>
                 </div>
             </div>

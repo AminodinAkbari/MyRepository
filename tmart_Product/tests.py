@@ -31,6 +31,9 @@ class TestViews(TestCase):
 
     def test_detail_view(self):
         qs = SingleProduct.objects.create(slug = 'This is a test product')
+        test_category = Category.objects.create(name = 'test_category')
+        test_subcategory = SubCategory.objects.create(category = test_category , title = "test_subcategory")
+        test_set = Set.objects.create(subcategory = test_subcategory , title_fa = 'test_set')
         response = self.client.get(reverse('product_details' , args = [qs.slug]))
         self.assertEquals(response.status_code , 200)
 

@@ -1,10 +1,12 @@
 from django.shortcuts import render
-from tmart_Cart_and_Favorite.models import Order , OrderDetail
+from tmart_Cart_and_Favorite.models import *
 from django.shortcuts import redirect, render
 from tmart_Product.models import SingleProduct
 from django.contrib.auth.decorators import login_required
 from django.http.response import Http404
-
+from .forms import CouponApplyForm
+from django.utils import timezone
+from django.views import generic
 # Create your views here.
 
 @login_required(login_url='/login')
@@ -38,7 +40,18 @@ def Cart_user(request):
         qs = OrderDetail.objects.filter(order_id = open_order or None)
     else:
         qs = None
-    return render(request, 'UserCart.html' , {'qs':qs})
+
+    now = timezone.now()
+    form = CouponApplyForm(request.POST)
+    if form.is_valid():
+        code = form.cleaned_data['code']
+        coupen = Coupon.objects.get(code__iexact = code ,valid_from__lte = now ,valid_to__gte = now,active = True)
+        if coupen:
+            open_order.coupon = coupen
+            open_order.save()
+            print('save')
+
+    return render(request, 'UserCart.html' , {'qs':qs , 'open_order':open_order , 'form':form})
 
 @login_required(login_url='/login')
 def remove_item_fromcart(request,**kwargs):
@@ -48,4 +61,33 @@ def remove_item_fromcart(request,**kwargs):
         if order_detail is not None:
             order_detail.delete()
             return redirect('/Cart')
+    raise Http404()
+
+
+def add_to_favorite(request,slug):
+    order = Order.objects.filter(owner_id=request.user.id,is_paid=False).first() or None
+    print(order.owner_id)
+
+    if order is None:
+        print("order is None")
+        order = Order.objects.create(owner_id=request.user.id,is_paid=False)
+
+    product = SingleProduct.objects.get(slug = slug)
+    Favorite.objects.create(product=product,user = request.user)
+    return redirect('/')
+
+class FavoritePage(generic.ListView):
+    template_name = 'favorites.html'
+    def get_queryset(self):
+        qs = Favorite.objects.filter(user = self.request.user)
+        print(qs)
+        return qs
+
+def remove_item_favorite(request,**kwargs):
+    detail_id = kwargs['order_id']
+    if detail_id is not None:
+        order_detail = Favorite.objects.get_queryset().get(id=detail_id) or None
+        if order_detail is not None:
+            order_detail.delete()
+            return redirect('/favorites')
     raise Http404()
