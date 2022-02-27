@@ -43,6 +43,9 @@ class Set(models.Model):
     title_fa = models.CharField(max_length=100)
     title_en = models.CharField(max_length=100 , blank = True , null = True)
 
+    def get_absolute_url(self):
+        return f"set/{self.id}"
+
     def __str__(self) :
         return self.title_fa
 

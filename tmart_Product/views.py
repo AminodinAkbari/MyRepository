@@ -18,6 +18,8 @@ class SelectedSet(ListView):
     def get_queryset(self):
         return SingleProduct.objects.filter(set_id = self.kwargs['id'])
 
+
+
 class ProductSearch(ListView):
     template_name =  'Products_templates/shop.html'
     paginate_by = 8
@@ -59,3 +61,6 @@ class ProductDetail(DetailView):
         context['related'] = SingleProduct.objects.filter(tags__singleproduct = self.object).exclude(id = self.object.id).distinct()[:10]
         context['category']=Category.objects.get(subcategory__set__singleproduct = self.object)
         return context
+
+def test(request):
+    return render(request , 'Category_component.html')
