@@ -72,16 +72,21 @@ def add_to_favorite(request,slug):
         print("order is None")
         order = Order.objects.create(owner_id=request.user.id,is_paid=False)
 
+    all_favorites = Favorite.objects.filter(user = request.user)
     product = SingleProduct.objects.get(slug = slug)
-    Favorite.objects.create(product=product,user = request.user)
-    return redirect('/')
+    if product.slug in all_favorites:
+        return redirect('/')
+    else:
+        Favorite.objects.create(product=product,user = request.user)
+        return redirect('/')
+    
 
 class FavoritePage(generic.ListView):
     template_name = 'favorites.html'
     def get_queryset(self):
-        qs = Favorite.objects.filter(user = self.request.user)
-        print(qs)
-        return qs
+        item = Favorite.objects.filter(user = self.request.user)
+        
+        return item
 
 def remove_item_favorite(request,**kwargs):
     detail_id = kwargs['order_id']

@@ -21,8 +21,8 @@ def Main_slider():
 	return {'MainSlider':qs}
 
 @register.inclusion_tag('common_slider.html')
-def related_products(related):
-	return{"qs":related , "title":'محصولات مرتبط'}
+def related_products(related,category):
+	return{"qs":related , "title":'محصولات مرتبط' , 'category':category}
 
 @register.inclusion_tag('common_slider.html')
 def popular_products():

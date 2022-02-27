@@ -91,7 +91,7 @@ class SingleProduct(models.Model):
         return self.price - self.discount
 
     def get_absolute_url(self):
-        return f"product_details/{self.slug}"
+        return f"ProductDetail/{self.slug}"
 
 
 def product_presave_receiver(sender,instance,*args,**kwargs):
