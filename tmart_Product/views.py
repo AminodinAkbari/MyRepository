@@ -30,41 +30,6 @@ class ProductSearch(ListView):
             return SingleProduct.objects.search(our_query)
         return SingleProduct.objects.all()
 
-        
-# def product_detail(request , slug):
-#     qs = SingleProduct.objects.get(slug = slug)
-#     category = Category.objects.get(subcategory__set__singleproduct = qs)
-#     gallery = singleProductGallery.objects.filter(product=qs)
-#     related = SingleProduct.objects.filter(tags__singleproduct = qs).exclude(id = qs.id).distinct()[:10]
-#     ip = request.user.ip_address
-#     if qs.features:
-#         features = qs.features.split(',')
-#     features = None
-
-#     if ip not in qs.hits.all():
-#         qs.hits.add(ip)
-
-#     review_form = False
-#     if request.user.is_authenticated:
-#         if not Review.objects.filter(product = qs , user = request.user).exists():
-#             review_form = ReviewForm(request.POST or None)
-#             if review_form.is_valid():
-#                 comment = review_form.cleaned_data.get('comment')
-#                 user = request.user
-#                 Review.objects.create(product = qs , user = user , comment = comment)
-
-#     all_reviews = Review.objects.filter(product = qs)
-
-#     context = {
-#     'object' : qs , 
-#     'gallery' : gallery , 
-#     'features':features , 
-#     'review_form':review_form ,
-#     'all_reviews':all_reviews,
-#     'related':related,
-#     'category':category,
-#     }
-#     return render(request , 'Products_templates/product_details.html' , context)
 
 class ProductDetail(DetailView):
 
