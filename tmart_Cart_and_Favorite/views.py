@@ -45,13 +45,14 @@ def Cart_user(request):
     form = CouponApplyForm(request.POST)
     if form.is_valid():
         code = form.cleaned_data['code']
-        coupen = Coupon.objects.get(code__iexact = code ,valid_from__lte = now ,valid_to__gte = now,active = True)
-        if coupen:
-            open_order.coupon = coupen
+        coupon = Coupon.objects.get(code__iexact = code ,valid_from__lte = now ,valid_to__gte = now,active = True)
+        if coupon:
+            open_order.coupon = coupon
             open_order.save()
-            print('save')
+    else:
+        coupon = None
 
-    return render(request, 'UserCart.html' , {'qs':qs , 'open_order':open_order , 'form':form})
+    return render(request, 'UserCart.html' , {'qs':qs , 'open_order':open_order , 'form':form,'coupon':coupon})
 
 @login_required(login_url='/login')
 def remove_item_fromcart(request,**kwargs):
@@ -73,19 +74,22 @@ def add_to_favorite(request,slug):
         order = Order.objects.create(owner_id=request.user.id,is_paid=False)
 
     all_favorites = Favorite.objects.filter(user = request.user)
+    print(all_favorites)
     product = SingleProduct.objects.get(slug = slug)
-    if product.slug in all_favorites:
-        return redirect('/')
-    else:
-        Favorite.objects.create(product=product,user = request.user)
-        return redirect('/')
+    print(product)
+    for i in all_favorites:
+        logic = product.title == i.product.title
+        if logic:
+            return redirect('/')
+        else:
+            Favorite.objects.create(product=product,user = request.user)
+            return redirect('/')
     
 
 class FavoritePage(generic.ListView):
     template_name = 'favorites.html'
     def get_queryset(self):
         item = Favorite.objects.filter(user = self.request.user)
-        
         return item
 
 def remove_item_favorite(request,**kwargs):

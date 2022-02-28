@@ -40,7 +40,7 @@
                                             {% for subcategory in category.subcategory.all %}
                                             
                                                 <div class="category-part-1 category-common2 mb--30">
-                                                    <h4 class="categories-subtitle">{{subcategory.title}}</h4>
+                                                    <h4 class="categories-subtitle">{{subcategory.title_fa}}</h4>
                                                     <ul>
                                                         {% for set in subcategory.set.all %}
                                                         <li><a href="/set/{{set.id}}"> {{set.title_fa}}</a></li>
@@ -195,9 +195,11 @@
                 </div>
             </div>
         </div>
-        <div class="ptb--100 bg__white">
+        <div class="bg__white">
             <div class="container">
-                {% include 'Category_component.html' %}
+                
+                        
+                    
             </div>
         </div>
         <!-- Start Our Product Area -->               

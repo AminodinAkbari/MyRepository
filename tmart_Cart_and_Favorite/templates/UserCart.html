@@ -21,12 +21,12 @@
                                     <tbody>
                                     	{% for item in qs %}
                                         <tr>
-                                            <td class="product-thumbnail"><a href="#"><img src="{{item.product.image.url}}" alt="product img"></a></td>
+                                            <td class="product-thumbnail"><a><img src="{{item.product.image.url}}" alt="product img"></a></td>
                                             <td class="product-name rtl"><a href="{{item.product.get_absolute_url}}">{{item.product.title}}</a></td>
                                             <td class="product-price"><span class="amount">{{item.price}}</span></td>
                                             <td class="product-quantity"><h5>{{item.count}}</h5></td>
                                             <td class="product-subtotal">{{item.get_total_price}}</td>
-                                            <td class="product-remove"><a href="remove_item_fromcart/{{item.id}}">X</a></td>
+                                            <td class="product-remove"><a href="remove_item_fromcart/{{item.id}}"><span class="ti-trash"></span></a></td>
                                         </tr>
                                         {% endfor %}
                                     </tbody>
@@ -40,8 +40,12 @@
                                         <p>اگر کد تخفیف دارید ، در این قسمت وارد کنید</p>
                                         <form action="Cart" method="POST" >
                                             {% csrf_token %}
+                                        {% if coupon is not None %}
+                                        <button type="submit" class="btn btn-warning" disabled>شما بیش از یک کد نمیتوانید استفاده کنید</button>
+                                        {% else %}
                                         {{form.code}}
-                                        <button type="submit" class="btn">اعمال کد تخفیف</button>
+                                        <button type="submit" class="btn btn-success">اعمال کد تخفیف</button>
+                                        {% endif %}
                                         </form>
                                     </div>
 
@@ -52,23 +56,27 @@
                                         <table>
                                             <tbody class="">
                                                 
-                                                <tr class="shipping">
-                                                    
+                                                <tr class="shipping">  
                                                     <td>
-                                                        
                                                         <p><a class="shipping-calculator-button" href="#">هزینه حمل و نقل رایگان برای خرید بالای 200 هزار تومان</a></p>
                                                     </td>
                                                 </tr>
+                                                
+                                                    {% if coupon is not None %}
+                                                    <h6 class="rtl alert alert-success">کد تخفیف وارد شده %{{open_order.coupon.discount}} از قیمت نهایی کم کرده است</h6>
+                                                    {% endif %}
+                                                
+                                                <hr>
                                                 <tr class="order-total">
                                                     <th>جمع</th>
                                                     <td>
-                                                        <strong><span class="amount">{{open_order.get_total_price}}</span></strong>
+                                                        <strong><span class="amount">{{open_order.get_total_price}} تومان</span></strong>
                                                     </td>
                                                 </tr>                                           
                                             </tbody>
                                         </table>
                                         <div class="wc-proceed-to-checkout">
-                                            <a href="checkout.html">Proceed to Checkout</a>
+                                            <a href="checkout.html">نهایی کردن خرید</a>
                                         </div>
                                     </div>
                                 </div>

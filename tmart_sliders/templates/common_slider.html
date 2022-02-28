@@ -1,6 +1,58 @@
 {% load static %}
+<section class="htc__product__area bg__white">
+{% if random_four_set is not None %}
+<div class="container bg__white">
+    <div class="main-container">
+        <div class="row">
+            <div class="cards rtl">
+                {% for item in random_four_set %}
+                    {% include 'Category_component.html' %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="container bg__white">
+    <div class="main-container">
+        <div class="row">
+            <div class="cards rtl">
+                {% for item in random_sets %}
+                    {% include 'Category_component.html' %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% if random_four_subcategory  %}
+<div class="container bg__white">
+    <div class="main-container">
+        <div class="row">
+            <div class="cards rtl">
+                {% for item in random_four_subcategory %}
+                    {% include 'Category_component.html' %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% elif random_subcategories %}
+<div class="container bg__white">
+    <div class="main-container">
+        <div class="row">
+            <div class="cards rtl">
+                {% for item in random_subcategories %}
+                    {% include 'Category_component.html' %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
 {% if qs %}
-     <section class="htc__product__area bg__white">
             <div class="container">
                 <div class="row">
                     <div class="col-md-3">
@@ -12,7 +64,7 @@
                                 <ul>
                                     {% if category %}
                                         {% for item in category.subcategory.all %}
-                                            <li><a href="#">{{item.title}}</a></li>
+                                            <li><a href="#">{{item.title_fa}}</a></li>
                                         {% endfor %}
                                     {% endif %}
                                 </ul>
@@ -51,9 +103,10 @@
                     </div>
                 </div>
             </div>
-        </section>
+        
 
             {% for item in qs %}
                 {% include 'Products_templates/quick_view.html' %}
             {% endfor %}
 {% endif %}
+</section>

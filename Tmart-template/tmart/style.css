@@ -3676,7 +3676,7 @@ blockquote::before {
     top: 2px;
 }
 a.shipping-calculator-button {
-    font-size: 11px;
+    font-size: 9px;
     font-weight: bold;
     color: #6f6f6f;
 }
@@ -4362,7 +4362,7 @@ a.shipping-calculator-button:hover {
 .card {
   margin: 20px;
   padding: 20px;
-  width: 500px;
+  width: 200px;
   min-height: 200px;
   display: grid;
   grid-template-rows: 20px 50px 1fr 50px;
@@ -4381,7 +4381,6 @@ a.shipping-calculator-button:hover {
 .card__icon {
   position: relative;
   text-decoration: none;
-  color: rgba(255, 255, 255, 0.9);
 }
 
 .card__link::after {
@@ -4412,7 +4411,6 @@ a.shipping-calculator-button:hover {
 .card__title {
   grid-row: 3/4;
   font-weight: 400;
-  color: #ffffff;
 }
 
 .card__apply {
@@ -4423,7 +4421,7 @@ a.shipping-calculator-button:hover {
 /* CARD BACKGROUNDS */
 
 .card-1 {
-  background: radial-gradient(#1fe4f5, #3fbafe);
+  /* background: radial-gradient(#1fe4f5, #3fbafe); */
 }
 
 .card-2 {

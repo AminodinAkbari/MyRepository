@@ -1,5 +1,5 @@
 from django import template
-from tmart_Product.models import SingleProduct , Category
+from tmart_Product.models import SingleProduct , Category,Set
 import random
 register = template.Library()
 
@@ -13,10 +13,11 @@ def navbar(request):
 		if half_price > final_price:
 			offers_products.append(item)
 
-	if len(offers_products) > 2:
-		selected_product_for_category_image = random.choice(offers_products)
+	selected_set = Set.objects.all().exclude(hot_subcategory_banner = 'empty')
+	if len(selected_set) > 1 :
+		set_image = random.choice(selected_set)
 	else:
-		selected_product_for_category_image = None
+		set_image = None
 	
 	context = {
 	'Home':'خانه' , 
@@ -24,7 +25,7 @@ def navbar(request):
 	'AboutUs':'درباره ما' ,
 	'ContactUs':'تماس با ما' ,
 	'offers':offers_products[:2] ,
-	'category_image':selected_product_for_category_image
+	'set_image':set_image
 	}
 	return {'request':request , 'context' : context}
 

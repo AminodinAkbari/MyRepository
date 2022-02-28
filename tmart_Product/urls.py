@@ -4,12 +4,12 @@ from tmart_Product.views import (
     ProductSearch,
     SelectedSet,
     ProductDetail,
-    test
+    AllProductsBy_SubCategory,
 )
 urlpatterns = [
     path('set/' , AllProducts.as_view() , name = 'AllProducts'),
     path('set/<int:id>' , SelectedSet.as_view() , name = 'set_with_id'),
     path('search' , ProductSearch.as_view() , name = 'search'),
     path('ProductDetail/<slug>' , ProductDetail.as_view() , name = 'ProductDetail'),
-    path('test' , test)
+    path('subcategory/<int:id>' , AllProductsBy_SubCategory.as_view() , name = 'ProductDetail'),
 ]

@@ -1,14 +1,16 @@
 {% extends 'Base.html' %}
 {% load sliders_tags %}
 {% block content %}
-<div class='container'>
-{% if object_list %}
-    {% for item in object_list %}
-        {% include 'components/favorite_products_component.html' %}
-    {% endfor %}
-{% else %}
-<h3 class="alert alert-danger text-center">هنوز چیزی به لیست علاقه مندی ها اضافه نکرده اید</h3>
-{%popular_products%}
-{% endif %}
+<div class="bg__white pb--100">
+    <div class='container'>
+        {% if object_list %}
+            {% for item in object_list %}
+                {% include 'components/favorite_products_component.html' %}
+            {% endfor %}
+        {% else %}
+            <h3 class="alert alert-danger text-center">هنوز چیزی به لیست علاقه مندی ها اضافه نکرده اید</h3>
+            {%popular_products%}
+        {% endif %}
+    </div>
 </div>
 {% endblock %}

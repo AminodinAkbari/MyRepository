@@ -33,15 +33,20 @@ class Category(models.Model):
 
 class SubCategory(models.Model):
     category = models.ForeignKey(Category , on_delete=models.CASCADE , null=True , blank=True, related_name="subcategory")
-    title = models.CharField(max_length=100)
+    title_fa = models.CharField(max_length=100)
+    title_en = models.CharField(max_length=100 , blank = True , null = True)
 
     def __str__(self) :
-        return self.title
+        return self.title_fa
+
+    def get_absolute_url(self):
+        return f"subcategory/{self.id}"
 
 class Set(models.Model):
     subcategory = models.ForeignKey(SubCategory , on_delete=models.CASCADE , null=True , blank=True, related_name="set")
     title_fa = models.CharField(max_length=100)
     title_en = models.CharField(max_length=100 , blank = True , null = True)
+    hot_subcategory_banner = models.ImageField(default = 'empty',upload_to = 'hot_suggestions',null = True , blank = True)
 
     def get_absolute_url(self):
         return f"set/{self.id}"

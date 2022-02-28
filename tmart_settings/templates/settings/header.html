@@ -15,7 +15,6 @@
                         <div class="col-md-8 col-lg-8 col-sm-6 col-xs-6">
                             <nav class="mainmenu__nav hidden-xs hidden-sm">
                                 <ul class="main__menu rtl">
-                                       
                                         <li class="drop"><a href="/">{{context.Home}}</a></li>
                                         <li class="drop"><a href="all">{{context.AllProducts}}</a></li>
 
@@ -28,13 +27,13 @@
                                                     </ul>
                                                 </li>
                                             {% endfor %}
-                                                {% if context.category_image is not None %}
+                                                {% if context.set_image is not None %}
                                                 <li>
                                                     <ul class="mega__item">
                                                         <li>
                                                             <div class="mega-item-img">
-                                                                <a href="">
-                                                                    <img width="190px" src="{{context.category_image.set.subcategory.category.hot_subcategory_banner.url}}" alt="category_image.hot_subcategory_banner.url">
+                                                                <a href="{{context.set_image.get_absolute_url}}">
+                                                                    <img width="190px" src="{{context.set_image.hot_subcategory_banner.url}}" alt="{{context.set_image.title_fa}}">
                                                                 </a>
                                                             </div>
                                                         </li>

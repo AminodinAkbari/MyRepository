@@ -16,8 +16,8 @@ class Order(models.Model):
         for detail in self.orderdetail_set.all():
             amount += detail.price * detail.count
         if self.coupon:
-            amount -= self.coupon.discount
-
+            discount = self.coupon.discount / 100 * amount
+            amount -= discount
         if amount > 199 :
             return amount
         else:

@@ -15,7 +15,7 @@
             </div>
         </div>
         <div class="product__details">
-            <h2><a href="/product_details/{{item.slug}}">{{item.title|truncatewords:6}}</a></h2>
+            <h2><a href="{{item.get_absolute_url}}">{{item.title|truncatewords:6}}</a></h2>
                 {% if item.discount > 0 %}
             <ul class="product__price">
                 <li class="old__price">{{item.price}}</li>
