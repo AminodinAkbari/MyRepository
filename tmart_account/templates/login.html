@@ -12,6 +12,7 @@
                     {% csrf_token %}
                     {{login_form.username}}
                     {{login_form.password}}
+                    {{login_form.captcha}}
                         <br>
                         {% for error in login_form.username.errors %}
                            <p class="text-danger p-3">{{error}}</p>

@@ -50,6 +50,10 @@ INSTALLED_APPS = [
     #pip
     'ckeditor',
     'star_ratings',
+    'rest_framework',
+    'captcha',
+    'django_filters',
+    
 ]
 
 MIDDLEWARE = [
@@ -147,3 +151,13 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR/"static/product_images/"
 
 STAR_RATINGS_STAR_HEIGHT = 15
+
+RECAPTCHA_PUBLIC_KEY  =  '6LeJc6weAAAAAI5NBgQOJS169ciYtn8c_Io1_SW4'
+RECAPTCHA_PRIVATE_KEY =  '6LeJc6weAAAAAH0e5zzaLwH38OqS5IphF5OoUce4'
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAdminUser',
+    ]
+}

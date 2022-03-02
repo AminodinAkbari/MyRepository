@@ -16,7 +16,7 @@
                             <nav class="mainmenu__nav hidden-xs hidden-sm">
                                 <ul class="main__menu rtl">
                                         <li class="drop"><a href="/">{{context.Home}}</a></li>
-                                        <li class="drop"><a href="all">{{context.AllProducts}}</a></li>
+                                        <li class="drop"><a href="/all">{{context.AllProducts}}</a></li>
 
                                         <li class="drop"><a href="/all_discount">بیشتر از %50 درصد تخفیف</a>
                                             <ul class="dropdown mega_dropdown" dir="ltr">
@@ -27,6 +27,7 @@
                                                     </ul>
                                                 </li>
                                             {% endfor %}
+                                            
                                                 {% if context.set_image is not None %}
                                                 <li>
                                                     <ul class="mega__item">

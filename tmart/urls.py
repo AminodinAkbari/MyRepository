@@ -28,6 +28,25 @@ urlpatterns = [
     path('', include('tmart_Product.urls')),
     path('', include('tmart_account.urls')),
     path('', include('tmart_Cart_and_Favorite.urls')),
+    path('api-auth/', include('rest_framework.urls')),
+]
+
+from .API_views import (
+    SingleProductPriceRangeAPI,
+    AllSingleProducts,
+    SpecificSingleProducts,
+    SingleProductsBySet,
+    SingleProductsByColors,
+    MostViewedSingleProducts
+)
+# REST-APIS
+urlpatterns+=[
+    path('product_price_range' , SingleProductPriceRangeAPI.as_view()),
+    path('all_products' , AllSingleProducts.as_view()),
+    path('all_products/<int:pk>' , SpecificSingleProducts.as_view()),
+    path('single_products_by_set/<int:set_id>' , SingleProductsBySet.as_view()),
+    path('single_products_by_colors/<color>' , SingleProductsByColors.as_view()),
+    path('most_viewed_products' , MostViewedSingleProducts.as_view()),
 ]
 
 if settings.DEBUG:

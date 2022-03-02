@@ -6,6 +6,8 @@ from tmart_Product.views import (
     ProductDetail,
     AllProductsBy_SubCategory,
 )
+# REST
+
 urlpatterns = [
     path('set/' , AllProducts.as_view() , name = 'AllProducts'),
     path('set/<int:id>' , SelectedSet.as_view() , name = 'set_with_id'),
@@ -13,3 +15,4 @@ urlpatterns = [
     path('ProductDetail/<slug>' , ProductDetail.as_view() , name = 'ProductDetail'),
     path('subcategory/<int:id>' , AllProductsBy_SubCategory.as_view() , name = 'ProductDetail'),
 ]
+

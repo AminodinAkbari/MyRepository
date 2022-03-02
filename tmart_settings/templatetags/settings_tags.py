@@ -1,5 +1,6 @@
 from django import template
 from tmart_Product.models import SingleProduct , Category,Set
+from tmart_settings.models import OurInformation
 import random
 register = template.Library()
 
@@ -31,5 +32,10 @@ def navbar(request):
 
 @register.inclusion_tag('settings/footer.html')
 def footer():
-	# item = Navbar.objects.all()[:6]
-	return {}
+	information = OurInformation.objects.filter(active = True).first()
+	categories = Category.objects.all()[:6]
+	return {
+	'information' : information,
+	'categories':categories,
+	
+	}

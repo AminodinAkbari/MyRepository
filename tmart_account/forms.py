@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
-
+from captcha.fields import ReCaptchaField
+from captcha.widgets import ReCaptchaV2Checkbox
 
 class LoginForm(forms.Form):
     username = forms.CharField(
@@ -9,7 +10,8 @@ class LoginForm(forms.Form):
     password = forms.CharField(
         widget=forms.PasswordInput(attrs={'placeholder':'رمز عبور','class':'rtl'}),
     )
-
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox)
+    
 class RegisterForm(forms.Form):
     first_name = forms.CharField(
         widget=forms.TextInput(attrs={'placeholder':'نام','class':'rtl','maxlength':'80'}),
@@ -26,7 +28,7 @@ class RegisterForm(forms.Form):
     re_password = forms.CharField(
         widget=forms.PasswordInput(attrs={'placeholder':'تکرار رمز عبور','class':'rtl'}),
     )
-
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox)
     def clean_re_password(self):
         password = self.cleaned_data.get('password')
         re_password = self.cleaned_data.get('re_password')
