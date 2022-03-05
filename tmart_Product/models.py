@@ -96,10 +96,13 @@ class SingleProduct(models.Model):
     image_tag.short_description = 'Image'
 
     def price_with_discount(self):
-        return self.price - self.discount
+        if self.price - self.discount > 0 :
+            return self.price - self.discount
+        else:
+            return "مقدار تخفیف بیشتر از قیمت کالا می باشد"
 
     def get_absolute_url(self):
-        return f"ProductDetail/{self.slug}"
+        return f"/ProductDetail/{self.slug}"
 
 
 def product_presave_receiver(sender,instance,*args,**kwargs):

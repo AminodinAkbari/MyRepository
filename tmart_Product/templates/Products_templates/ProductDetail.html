@@ -4,24 +4,23 @@
 {% load sliders_tags %}
 {% block content %}
 
-<!--<div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url({% static 'tmart/images/bg/2.jpg' %}) no-repeat scroll center center / cover ;">
-    <div class="ht__bradcaump__wrap">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="bradcaump__inner text-center">
-                        <h2 class="bradcaump-title">Product Details</h2>
-                        <nav class="bradcaump-inner">
-                          <a class="breadcrumb-item" href="index.html">Home</a>
-                          <span class="brd-separetor">/</span>
-                          <span class="breadcrumb-item active">Product Details</span>
-                        </nav>
-                    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="bradcaump__inner text-right rtl">
+                    <nav class="bradcaump-inner">
+                      <a class="breadcrumb-item" href="{% url 'Home' %}">خانه</a>
+                      <span class="brd-separetor">/</span>
+                      <a class="breadcrumb-item" href="{% url 'tmart_Product:AllProducts' %}">محصولات</a>
+                      <span class="brd-separetor">/</span>
+                      <span class="breadcrumb-item active">{{object.title}}</span>
+                    </nav>
                 </div>
             </div>
         </div>
     </div>
-</div>-->
+
 <!-- End Bradcaump area -->
 <!-- Start Product Details -->
 <section class="htc__product__details pt--120 pb--100 bg__white">
@@ -177,7 +176,11 @@
                             <div class="product-categories-menu">
                                 <ul>
                                     {% for subcategory in category.subcategory.all %}
-                                    <li><a href="#">{{subcategory.title}}</a></li>
+                                    
+                                        {% for i in subcategory.set.all|slice:":2" %}
+                                                <li><a href="{% url 'tmart_Product:set_with_id' id=i.id %}">{{i.title_fa}}</a></li>
+                                        {% endfor %}
+
                                     {%endfor%}
                                 </ul>
                             </div>
@@ -331,7 +334,9 @@
                                     <div class="review-btn">
                                         <button class="fv-btn" type="submit">ثبت دیدگاه</button>
                                     </div>
-                                </form>   
+                                </form>  
+                            {% else %}
+                            <h5>برای ثبت دیدگاه باید <a href="{% url 'tmart_account:login' %}">وارد</a> شوید</h5> 
                             {% endif %}                             
                         </div>
                     </div>

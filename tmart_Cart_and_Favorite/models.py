@@ -5,7 +5,7 @@ from django.core.validators import MinValueValidator , MaxValueValidator
 
 # Create your models here.
 class Order(models.Model):
-    owner = models.ForeignKey(User,on_delete=models.CASCADE)
+    owner = models.ForeignKey(User,on_delete=models.CASCADE , null=True)
     is_paid = models.BooleanField(default=False)
     paymant_date=models.DateTimeField(blank=True,null=True)	
     shipping = models.IntegerField(default = 20000)

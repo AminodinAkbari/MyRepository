@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'captcha',
     'django_filters',
+    'user_visit',
     
 ]
 
@@ -65,6 +66,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'tmart_settings.MiddleWare.SaveIPAddressMiddleware',
+    'user_visit.middleware.UserVisitMiddleware',
 ]
 
 

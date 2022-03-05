@@ -8,11 +8,12 @@ register = template.Library()
 @register.inclusion_tag('settings/header.html')
 def navbar(request):
 	offers_products = []
-	for item in SingleProduct.objects.all():
-		half_price = item.price / 2
-		final_price = item.price - item.discount
-		if half_price > final_price:
-			offers_products.append(item)
+	if SingleProduct.objects.all() is not None:
+		for item in SingleProduct.objects.all():
+			half_price = item.price / 2
+			final_price = item.price - item.discount
+			if half_price > final_price:
+				offers_products.append(item)
 
 	selected_set = Set.objects.all().exclude(hot_subcategory_banner = 'empty')
 	if len(selected_set) > 1 :

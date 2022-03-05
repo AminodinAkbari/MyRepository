@@ -18,13 +18,12 @@ from django.urls import path , include
 from django.conf.urls.static import static
 from django.conf import settings
 
-from .views import home
-from tmart_Product.views import AllProducts
+from .views import  Home
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home),
+    path('', Home.as_view() , name = 'Home'),
     path('ratings/', include('star_ratings.urls', namespace='ratings')),
-    path('all', AllProducts.as_view() , name = 'all'),
     path('', include('tmart_Product.urls')),
     path('', include('tmart_account.urls')),
     path('', include('tmart_Cart_and_Favorite.urls')),

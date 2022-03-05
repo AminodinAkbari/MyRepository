@@ -1,5 +1,12 @@
 {% load static %}
-<section class="htc__product__area bg__white">
+{% if qs %}
+<section class="htc__product__area bg__white ptb--100">
+{% if user_title %}
+    <div class="container">
+        <hr>
+        <h4 class="rtl">{{user_title}}</h4>
+    </div>
+{% endif %}
 {% if random_four_set is not None %}
 <div class="container bg__white">
     <div class="main-container">
@@ -52,7 +59,7 @@
 </div>
 {% endif %}
 
-{% if qs %}
+
             <div class="container">
                 <div class="row">
                     <div class="col-md-3">
@@ -64,7 +71,11 @@
                                 <ul>
                                     {% if category %}
                                         {% for item in category.subcategory.all %}
-                                            <li><a href="#">{{item.title_fa}}</a></li>
+
+                                            {% for i in item.set.all|slice:":2" %}
+                                                <li><a href="{% url 'tmart_Product:set_with_id' id=i.id %}">{{i.title_fa}}</a></li>
+                                            {% endfor %}
+                                        
                                         {% endfor %}
                                     {% endif %}
                                 </ul>

@@ -64,10 +64,9 @@ def remove_item_fromcart(request,**kwargs):
             return redirect('/Cart')
     raise Http404()
 
-
+@login_required(login_url='/login')
 def add_to_favorite(request,slug):
     order = Order.objects.filter(owner_id=request.user.id,is_paid=False).first() or None
-    print(order.owner_id)
 
     if order is None:
         print("order is None")

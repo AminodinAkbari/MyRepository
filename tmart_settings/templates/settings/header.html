@@ -16,7 +16,7 @@
                             <nav class="mainmenu__nav hidden-xs hidden-sm">
                                 <ul class="main__menu rtl">
                                         <li class="drop"><a href="/">{{context.Home}}</a></li>
-                                        <li class="drop"><a href="/all">{{context.AllProducts}}</a></li>
+                                        <li class="drop"><a href="{% url 'tmart_Product:AllProducts' %}">{{context.AllProducts}}</a></li>
 
                                         <li class="drop"><a href="/all_discount">بیشتر از %50 درصد تخفیف</a>
                                             <ul class="dropdown mega_dropdown" dir="ltr">
@@ -72,7 +72,7 @@
                                 <nav id="mobile_dropdown">
                                     <ul>
                                         <li class="drop"><a href="/">{{context.Home}}</a></li>
-                                        <li class="drop"><a href="all">{{context.AllProducts}}</a></li>
+                                        <li class="drop"><a href="{% url 'tmart_Product:AllProducts' %}">{{context.AllProducts}}</a></li>
                                         <li class="drop"><a href="">{{context.AboutUs}}</a></li>
                                         <li class="drop"><a href="">{{context.ContactUs}}</a></li> 
                                     </ul>
@@ -102,7 +102,7 @@
                                 </li>
                                 
                                 
-                                <li class="cart__menu"><a href=""><span class="ti-shopping-cart"></span></a></li>
+                                <li class="cart__menu"><a href="/Cart"><span class="ti-shopping-cart"></span></a></li>
                                 <li class="toggle__menu hidden-xs hidden-sm"><a><span class="ti-menu"></span></a></li>
                             </ul>
                         </div>
@@ -235,7 +235,7 @@
                         <li class="total__price">$130.00</li>
                     </ul>
                     <ul class="shopping__btn">
-                        <li><a href="cart.html">View Cart</a></li>
+                        <li><a href="/Cart">View Cart</a></li>
                         <li class="shp__checkout"><a href="checkout.html">Checkout</a></li>
                     </ul>
                 </div>

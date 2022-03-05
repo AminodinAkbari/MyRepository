@@ -4,6 +4,8 @@ from tmart_Product.models import SingleProduct , Set , Category, SubCategory
 import random
 from django.db.models import Count
 
+from tmart_account.models import History
+
 register = template.Library()
 
 #---this function made side categories (you can see it in left sliders in index.html)
@@ -70,7 +72,25 @@ def high_sales():
 		'category':category ,
 		'random_four_subcategory':random_four_subcategory
 		}
-	
+
 @register.inclusion_tag('common_slider.html')
-def base_on_your_visits():
-	pass
+def singleproducts_base_on_user_visits(request):
+	if request.user.is_authenticated:
+		user_product = []
+		qs = History.objects.filter(user = request.user).first()
+		user_tags = qs.product.split(',')
+		if len(user_tags) > 2:
+			selected_user_tag = random.choice(user_tags)
+			print(selected_user_tag)
+			qs = SingleProduct.objects.filter(tags__name = selected_user_tag)
+
+			if len(qs) > 2:
+				return{
+				'qs':qs , 
+				'title': 'محصولات پیشنهادی برای شما',
+				'user_title':'محصولات و دسته بندی های مورد علاقه شما (بر اساس بازدید شما)',
+				'category':side_sets(qs),
+				'random_four_subcategory':random_subcategories()
+				}
+
+	

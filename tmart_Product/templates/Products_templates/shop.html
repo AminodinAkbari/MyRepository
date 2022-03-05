@@ -1,24 +1,19 @@
 {% extends 'Base.html' %}
 {% load static %}
 {% block content %}
-        <div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url(static/tmart/images/bg/2.jpg) no-repeat scroll center center / cover ;">
-            <div class="ht__bradcaump__wrap">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="bradcaump__inner text-center">
-                                <h2 class="bradcaump-title">Shop Page</h2>
-                                <nav class="bradcaump-inner">
-                                  <a class="breadcrumb-item" href="index.html">Home</a>
-                                  <span class="brd-separetor">/</span>
-                                  <span class="breadcrumb-item active">Shop Page</span>
-                                </nav>
-                            </div>
-                        </div>
-                    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="bradcaump__inner text-right rtl">
+                    <nav class="bradcaump-inner">
+                      <a class="breadcrumb-item" href="{% url 'Home' %}">خانه</a>
+                      <span class="brd-separetor">/</span>
+                      <a class="breadcrumb-item" href="{% url 'tmart_Product:AllProducts' %}">محصولات</a>
+                    </nav>
                 </div>
             </div>
         </div>
+    </div>
         <!-- End Bradcaump area --> 
         <!-- Start Our Product Area -->
         <section class="htc__product__area shop__page ptb--130 bg__white">

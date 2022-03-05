@@ -1,5 +1,8 @@
 from django.test import TestCase , Client
+
 from django.urls import reverse , resolve
+from django.core.files.uploadedfile import SimpleUploadedFile
+
 from tmart_Product.views import *  
 from tmart_Product.models import *
 
@@ -10,45 +13,61 @@ def setUp(self):
 
 class TestUrls(TestCase):
 
-
     def test_allproducts(self):
-        url = reverse('AllProducts')
+        url = reverse('tmart_Product:AllProducts')
         self.assertEquals(resolve(url).func.view_class , AllProducts)
 
     def test_set(self):
-        url = reverse('set_with_id')
+        url = reverse('tmart_Product:set_with_id')
         self.assertEquals(resolve(url).func.view_class , SelectedSet)
 
     def test_search(self):
-        url = reverse('search')
+        url = reverse('tmart_Product:search')
         self.assertEquals(resolve(url).func.view_class , ProductSearch)
 
     def test_set(self):
-        url = reverse('product_details' , args=['slug'])
-        self.assertEquals(resolve(url).func , product_detail)
+        url = reverse('tmart_Product:ProductDetail' , args=['slug'])
+        self.assertEquals(resolve(url).func.view_class , ProductDetail)
 
 class TestViews(TestCase):
 
     def test_detail_view(self):
         qs = SingleProduct.objects.create(slug = 'This is a test product')
-        test_category = Category.objects.create(name = 'test_category')
-        test_subcategory = SubCategory.objects.create(category = test_category , title = "test_subcategory")
-        test_set = Set.objects.create(subcategory = test_subcategory , title_fa = 'test_set')
-        response = self.client.get(reverse('product_details' , args = [qs.slug]))
+        response = self.client.get(reverse('tmart_Product:ProductDetail' , args = [qs.slug]))
         self.assertEquals(response.status_code , 200)
-
 
     def test_AllProduct(self):
         qs = SingleProduct.objects.create(slug = 'This is a test product')
-        response = self.client.get(reverse('all'))
+        response = self.client.get(reverse('tmart_Product:AllProducts'))
         self.assertEquals(response.status_code , 200)
 
+    def test_AllProduct_BySubCategory(self):
+        qs = SingleProduct.objects.create(slug = 'This is a test product')
+        response = self.client.get(reverse('tmart_Product:SubCategory' , args=[1]))
+        self.assertEquals(response.status_code , 200)
 
     def test_SelectedSet(self):
         qs = SingleProduct.objects.create(slug = 'This is a test product')
-        response = self.client.get(reverse('set_with_id' , args=[1]))
+        response = self.client.get(reverse('tmart_Product:set_with_id' , args=[1]))
         self.assertEquals(response.status_code , 200)
 
     def test_ProductSearch(self):
-        response = self.client.get(reverse('search'))
+        response = self.client.get(reverse('tmart_Product:search'))
         self.assertEquals(response.status_code , 200)
+
+class TestModels(TestCase):
+
+    def setUp(self):
+        category = Category.objects.create(name = 'category_test' , description = 'category_description_test')
+        subcategory = SubCategory.objects.create(category = category , title_fa = 'test_title_fa')
+        Set.objects.create(subcategory = subcategory , title_fa = 'test_title_fa')
+
+        tags = Tags.objects.create(name = 'test_tag_name')
+        colors = Colors.objects.create(name = 'test_colors_name' , code = '#111')
+
+        singleproducts = SingleProduct.objects.create(title = 'singleproduct_title')
+
+    def test_setUp(self):
+        category = Category.objects.get(name = 'category_test')
+        subcategory = SubCategory.objects.get(category = category)
+        set = Set.objects.get(subcategory = subcategory)
