@@ -63,6 +63,15 @@
 .red_site_color{
     color : #ff4136 !important;
 }
+.pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus{
+    background-color: #ff4136 !important;
+    border-color: #ff4136 !important;
+    color: #fff !important;
+}
+.pagination>li>a, .pagination>li>span{
+    color: #000 !important;
+    background-color: #fff !important;
+}
 a{
     cursor: pointer;
 }

@@ -4,10 +4,10 @@
                     <div class="row">
                         <div class="col-md-10 col-lg-8 col-md-offset-2 col-lg-offset-4 col-sm-12 col-xs-12">
                             <div class="slider__inner">
-                                <h1>{{item.title}} <span class="text--theme"></span></h1>
+                                <h2 class="rtl">{{item.title}} <span class="text--theme"></span></h2>
                                 <p class="rtl">{{item.description}}</p>
                                 <div class="slider__btn">
-                                    <a class="htc__btn" href="cart.html">{{item.button_text}}</a>
+                                    <a class="htc__btn rtl" href="{{item.link_to_set.get_absolute_url}}">{{item.button_text}}</a>
                                 </div>
                             </div>
                         </div>

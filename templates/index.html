@@ -1,6 +1,6 @@
 {% extends 'Base.html' %}
 {% load sliders_tags %}
-
+{% load settings_tags %}
 {% load static %}
 
 
@@ -177,29 +177,16 @@
             </div>
         </section>
         <!-- End Feature Product -->
-        <div class="only-banner ptb--100 bg__white">
-            <div class="container">
-                <div class="only-banner-img">
-                    <a href="shop-sidebar.html"><img src="{% static 'tmart/images/new-product/3.jpg' %}" alt="new product"></a>
-                </div>
-            </div>
-        </div>
+        
 
         <!-- Start Our Product Area -->               
         {% popular_products %}
         <!-- End Our Product Area -->
 
-        <div class="only-banner ptb--100 bg__white">
-            <div class="container">
-                <div class="only-banner-img">
-                    <a href="shop-sidebar.html"><img src="{% static 'tmart/images/new-product/6.jpg' %}" alt="new product"></a>
-                </div>
-            </div>
-        </div>
         <div class="bg__white">
             <div class="container">
                 
-                        
+                {% category_component 0 3 %}   
                     
             </div>
         </div>

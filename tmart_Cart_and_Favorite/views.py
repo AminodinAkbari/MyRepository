@@ -67,22 +67,16 @@ def remove_item_fromcart(request,**kwargs):
 @login_required(login_url='/login')
 def add_to_favorite(request,slug):
     order = Order.objects.filter(owner_id=request.user.id,is_paid=False).first() or None
-
     if order is None:
         print("order is None")
         order = Order.objects.create(owner_id=request.user.id,is_paid=False)
-
-    all_favorites = Favorite.objects.filter(user = request.user)
-    print(all_favorites)
     product = SingleProduct.objects.get(slug = slug)
-    print(product)
-    for i in all_favorites:
-        logic = product.title == i.product.title
-        if logic:
-            return redirect('/')
-        else:
-            Favorite.objects.create(product=product,user = request.user)
-            return redirect('/')
+    try:
+        Favorite.objects.get(product = product ,user = request.user)
+    except:
+        Favorite.objects.create(product = product , user = request.user)
+    return redirect('/')
+
     
 
 class FavoritePage(generic.ListView):

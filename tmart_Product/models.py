@@ -31,6 +31,9 @@ class Category(models.Model):
     def __str__(self) :
         return self.name
 
+    def get_absolute_url(self):
+        return f"category/{self.id}"
+
 class SubCategory(models.Model):
     category = models.ForeignKey(Category , on_delete=models.CASCADE , null=True , blank=True, related_name="subcategory")
     title_fa = models.CharField(max_length=100)

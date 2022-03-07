@@ -101,7 +101,18 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME':'AminAkbari$Tmart_DB',
+#         'USER': 'AminAkbari',
+#         'PASSWORD':'aminamin2018',
+#         'HOST':'AminAkbari.mysql.pythonanywhere-services.com',
+#         'OPTIONS' :{
+#             'sql_mode' : 'traditional'
+#         }
+#     }
+# }
 
 
 # Password validation
@@ -145,13 +156,28 @@ USE_TZ = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+STATICFILES_DIRS = [
+     BASE_DIR / "Tmart-template"
+]
+
+
+# if DEBUG:
+
+#     STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+# else:
+
+#     STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
-# STATICFILES_DIRS = [
-#     BASE_DIR / "Tmart-template"
-# ]
-STATIC_ROOT = BASE_DIR/"static/static_root"
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR/"static/product_images/"
+
+# STATIC_URL = '/static/'
+# STATIC_ROOT ="static/static_root"
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT ="static/product_images/"
 
 STAR_RATINGS_STAR_HEIGHT = 15
 

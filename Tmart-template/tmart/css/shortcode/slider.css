@@ -375,6 +375,11 @@
 .slider-text-right.slider-height-inherit .slider__inner {
   padding: 184px 40px 184px 0;
 }
+.slider__inner h2{
+  background-color: #e5e5e58f;
+  padding: 20px;
+  border-radius: 10px;
+}
 
 .slider-text-left .slider__inner h1 {
   text-align: left;

@@ -54,7 +54,7 @@
                         <h2 class="ft__title">دسته بندی ها</h2>
                         <ul class="footer-categories">
                             {% for item in categories %}
-                                <li><a href="shop-sidebar.html">{{item.name}}</a></li>
+                                <li><a href="{{item.get_absolute_url}}">{{item.name}}</a></li>
                             {% endfor %}
                         </ul>
                     </div>

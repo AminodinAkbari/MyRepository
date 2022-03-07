@@ -26,7 +26,7 @@
                                             <td class="product-price"><span class="amount">{{item.price}}</span></td>
                                             <td class="product-quantity"><h5>{{item.count}}</h5></td>
                                             <td class="product-subtotal">{{item.get_total_price}}</td>
-                                            <td class="product-remove"><a href="remove_item_fromcart/{{item.id}}"><span class="ti-trash"></span></a></td>
+                                            <td class="product-remove"><a href="{% url 'remove_item_fromcart' order_id=item.id %}"><span class="ti-trash"></span></a></td>
                                         </tr>
                                         {% endfor %}
                                     </tbody>
@@ -40,7 +40,7 @@
                                         <p>اگر کد تخفیف دارید ، در این قسمت وارد کنید</p>
                                         <form action="Cart" method="POST" >
                                             {% csrf_token %}
-                                        {% if coupon is not None %}
+                                        {% if open_order.coupon is not None %}
                                         <button type="submit" class="btn btn-warning" disabled>شما بیش از یک کد نمیتوانید استفاده کنید</button>
                                         {% else %}
                                         {{form.code}}

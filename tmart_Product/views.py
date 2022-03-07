@@ -20,10 +20,17 @@ class AllProductsBy_SubCategory(ListView):
 
 class SelectedSet(ListView):
     template_name = 'Products_templates/shop.html'
-    paginate_by = 8
+    paginate_by = 7
 
     def get_queryset(self):
         return SingleProduct.objects.filter(set_id = self.kwargs['id'])
+
+class SelectedCategory(ListView):
+    template_name = 'Products_templates/shop_ByCategory.html'
+    paginate_by = 8
+
+    def get_queryset(self):
+        return SingleProduct.objects.filter(set__subcategory__category_id = self.kwargs['id'])
 
 
 

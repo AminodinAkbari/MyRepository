@@ -18,7 +18,9 @@ class Order(models.Model):
         if self.coupon:
             discount = self.coupon.discount / 100 * amount
             amount -= discount
-        if amount > 199 :
+        if amount > 199000 :
+            return amount
+        elif amount == 0:
             return amount
         else:
             return amount+self.shipping

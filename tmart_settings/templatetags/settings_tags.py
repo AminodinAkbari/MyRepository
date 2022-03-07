@@ -40,3 +40,9 @@ def footer():
 	'categories':categories,
 	
 	}
+
+@register.inclusion_tag('Products_templates/wide_banner_component.html')
+def category_component(start , end):
+	qs = Category.objects.all()[(start):(end)]
+	if len(qs) > 2:
+		return {'qs' : qs}
