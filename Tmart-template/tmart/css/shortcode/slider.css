@@ -87,28 +87,22 @@
 }
 .slider__btn a.htc__btn {
     color: #000;
-    font-family: Dosis;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 500;
     line-height: 30px;
     padding-right: 30px;
     position: relative;
     text-transform: uppercase;
     transition: all 0.3s ease 0s;
-}
-.slider__btn a.htc__btn::before {
-    background: #000 none repeat scroll 0 0;
-    content: "";
-    height: 1px;
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transition: all 0.3s ease 0s;
-    width: 20px;
-}
-.slider__btn a.htc__btn:hover {
+    background-color: #e5e5e58f;
+    padding: 5px;
+    border-radius: 5px;
     color: #ff4136;
 }
+
+/*.slider__btn a.htc__btn:hover {
+    color: #ff4136;
+}*/
 .slider__btn a.htc__btn:hover::before {
     background: #ff4136 none repeat scroll 0 0;
 }
