@@ -144,8 +144,8 @@
 
                         <ul class="pro__dtl__btn">
                             <li class="buy__now__btn"><button type="submit">افزودن به سبد خرید</button></li>
-                            <li><a href="#"><span class="ti-heart"></span></a></li>
-                            <li><a href="#"><span class="ti-email"></span></a></li>
+                            <li><a href="{% url 'add_to_favorite' slug=object.slug%}"><span class="ti-heart"></span></a></li>
+                            
                         </ul>
 
                         </form>

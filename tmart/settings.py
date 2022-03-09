@@ -102,18 +102,7 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME':'AminAkbari$Tmart_DB',
-#         'USER': 'AminAkbari',
-#         'PASSWORD':'aminamin2018',
-#         'HOST':'AminAkbari.mysql.pythonanywhere-services.com',
-#         'OPTIONS' :{
-#             'sql_mode' : 'traditional'
-#         }
-#     }
-# }
+
 
 
 # Password validation

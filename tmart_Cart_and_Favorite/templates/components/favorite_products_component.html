@@ -10,7 +10,6 @@
                                         <div class="product__hover__info">
                                             <ul class="product__action">
                                                 <li><a data-toggle="modal" data-target="#productModal{{item.product.id}}" title="Quick View" class="quick-view modal-view detail-link" href="#"><span class="ti-eye"></span></a></li>
-                                                <li><a title="Add TO Cart" href="cart.html"><span class="ti-shopping-cart"></span></a></li>
                                                 <li><a title="Wishlist" href="{% url 'remove_item_fromfavorite' order_id=item.id %}"><span class="ti-trash"></span></a></li>
                                             </ul>
                                         </div>

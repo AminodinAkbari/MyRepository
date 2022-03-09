@@ -26,6 +26,7 @@ urlpatterns = [
     path('ratings/', include('star_ratings.urls', namespace='ratings')),
     path('', include('tmart_Product.urls')),
     path('', include('tmart_account.urls')),
+    path('', include('tmart_settings.urls')),
     path('', include('tmart_Cart_and_Favorite.urls')),
     path('api-auth/', include('rest_framework.urls')),
 ]

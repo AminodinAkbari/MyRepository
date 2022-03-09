@@ -10,7 +10,7 @@ register = template.Library()
 
 #---this function made side categories (you can see it in left sliders in index.html)
 def side_sets(qs):
-	if len(qs) > 3:
+	if len(qs) > 1:
 		query = random.choice(qs)
 		sets = Category.objects.get(subcategory__set__singleproduct = query)
 		if sets is not None:
@@ -38,17 +38,17 @@ def random_subcategories():
 	
 
 
-@register.inclusion_tag('MainBigSlider.html')
-def Main_slider():
+@register.inclusion_tag('MainBigSlider.html' , takes_context=True)
+def Main_slider(context):
 	qs = MainBigSlider.objects.filter(activate = True)
 	return {'MainSlider':qs}
 
-@register.inclusion_tag('common_slider.html')
-def related_products(related,category):
+@register.inclusion_tag('common_slider.html' , takes_context=True)
+def related_products(context,related,category):
 	return{"qs":related , "title":'محصولات مرتبط' , 'category':category}
 
-@register.inclusion_tag('common_slider.html')
-def popular_products():
+@register.inclusion_tag('common_slider.html' , takes_context=True)
+def popular_products(context):
 	random_four_set = random_sets()
 	qs = SingleProduct.objects.annotate(hits_count = Count('hits')).filter(hits_count__gt = 3)[:10]
 	category=side_sets(qs)
@@ -61,8 +61,8 @@ def popular_products():
 	'random_sets':random_sets
 	}
 
-@register.inclusion_tag('common_slider.html')
-def high_sales():
+@register.inclusion_tag('common_slider.html' , takes_context=True)
+def high_sales(context):
 	random_four_subcategory = random_subcategories()
 	qs = SingleProduct.objects.filter(discount__gt = 100000)[:10]
 	category=side_sets(qs)

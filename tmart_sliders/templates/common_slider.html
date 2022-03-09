@@ -1,7 +1,7 @@
 {% load static %}
 {% if qs %}
 <section class="htc__product__area bg__white ptb--100">
-{% if user_title %}
+    {% if user_title %}
     <div class="container">
         <hr>
         <h4 class="rtl">{{user_title}}</h4>
@@ -119,5 +119,5 @@
             {% for item in qs %}
                 {% include 'Products_templates/quick_view.html' %}
             {% endfor %}
+        </section>
 {% endif %}
-</section>
