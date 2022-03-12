@@ -10,7 +10,7 @@ register = template.Library()
 
 #---this function made side categories (you can see it in left sliders in index.html)
 def side_sets(qs):
-	if len(qs) > 1:
+	if len(qs) > 0:
 		query = random.choice(qs)
 		sets = Category.objects.get(subcategory__set__singleproduct = query)
 		if sets is not None:
@@ -86,7 +86,7 @@ def singleproducts_base_on_user_visits(request):
 				print(selected_user_tag)
 				qs = SingleProduct.objects.filter(tags__name = selected_user_tag)
 
-				if len(qs) > 2:
+				if len(qs) > 0:
 					return{
 					'qs':qs , 
 					'title': 'محصولات پیشنهادی برای شما',

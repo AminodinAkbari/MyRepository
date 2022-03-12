@@ -1120,7 +1120,7 @@ h4.offset__title {
 .category-menu-list ul li .category-menu-dropdown {
     background: #fff none repeat scroll 0 0;
     box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.1);
-    left: 110%;
+    left: 130%;
     opacity: 0;
     visibility: hidden;
     padding: 52px 30px;
@@ -1130,6 +1130,7 @@ h4.offset__title {
     transition: all 0.3s ease 0s;
     width: 800px;
     z-index: 999999999;
+    border: 2px #fff solid;
 }
 .category-menu-list ul li:hover .category-menu-dropdown {
     opacity: 1;

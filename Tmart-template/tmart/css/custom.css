@@ -12,3 +12,7 @@
 .rtl{
   direction: rtl !important;
 }
+.p-30{
+  padding: 30px;
+  line-height: 26px;
+}

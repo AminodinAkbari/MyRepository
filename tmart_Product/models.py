@@ -6,6 +6,7 @@ from django.db.models.signals import pre_save
 from tmart.utils import unique_slug_generator
 from django.utils.html import format_html
 from django.contrib.auth.models import User
+from django.forms import ModelForm
 
 from tmart_settings.models import IPs
 # Create your models here.
@@ -135,3 +136,7 @@ class Review(models.Model):
 
     def __str__(self) :
         return self.user.first_name
+class ReviewForm(ModelForm):
+    class Meta:
+        model = Review
+        fields = ['product', 'user'  ,'comment']

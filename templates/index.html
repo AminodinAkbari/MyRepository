@@ -5,14 +5,14 @@
 
 
 {% block content %} 
-
-    <!--[if lt IE 8]>
-        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->  
-    
-        
-        <!-- Start Offset Wrapper -->
-        
+{% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-success text-center alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>{{message}}</strong>
+    </div>
+    {% endfor %}
+{% endif %}
         <!-- End Offset Wrapper -->
         <!-- Start Feature Product -->
         <section class="categories-slider-area bg__white">
@@ -36,7 +36,7 @@
                             <div class="category-menu-list">
                                 <ul>                           
                                     {% for category in category %}
-                                        <li><a href="#"><img alt="" src="{% static 'tmart/images/icons/thum3.png' %}"> {{category.name}} <i class="zmdi zmdi-chevron-right"></i></a>
+                                        <li><a href="#"><img alt="" src="{% static 'tmart/images/icons/map.png' %}"> {{category.name}} <i class="zmdi zmdi-chevron-right"></i></a>
                                             <div class="category-menu-dropdown">
                                             {% for subcategory in category.subcategory.all %}
                                             
@@ -50,11 +50,13 @@
                                                 </div>
                                             
                                             {% endfor %}
+                                            {% if category.hot_subcategory_banner %}
                                             <div class="mega-banner-img">
-                                                <a href="single-product.html">
-                                                    <img src="{% static 'tmart/images/feature-img/5.jpg' %}" alt="">
+                                                <a href="{{category.get_absolute_url}}">
+                                                    <img src="{{category.hot_subcategory_banner.url}}" width="25%" alt="">
                                                 </a>
                                             </div>
+                                            {% endif %}
                                             </div>
                                         </li>
                                     {% endfor %}

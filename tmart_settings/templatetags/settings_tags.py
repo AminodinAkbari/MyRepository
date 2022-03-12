@@ -1,5 +1,5 @@
 from django import template
-from tmart_Product.models import SingleProduct , Category,Set
+from tmart_Product.models import SingleProduct , Category,Set , Tags,Colors
 from tmart_settings.models import OurInformation
 import random
 register = template.Library()
@@ -49,3 +49,15 @@ def category_component(start , end):
 		return {'qs' : final_list}
 	else:
 		return {'qs' : []}
+
+@register.inclusion_tag('Products_templates/filter_menu.html')
+def filter_menu():
+	filters = ['پرفروش ترین' , 'ارزانترین' , 'گرانترین' , 'تخفیف دارها']
+	tags = Tags.objects.all()[:8]
+	colors = Colors.objects.all()[:5]
+	context = {
+	"filters" : filters,
+	"tags":tags,
+	"colors":colors
+	}
+	return context

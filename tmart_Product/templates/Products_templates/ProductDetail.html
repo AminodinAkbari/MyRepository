@@ -143,8 +143,8 @@
                             </div>
 
                         <ul class="pro__dtl__btn">
-                            <li class="buy__now__btn"><button type="submit">افزودن به سبد خرید</button></li>
-                            <li><a href="{% url 'add_to_favorite' slug=object.slug%}"><span class="ti-heart"></span></a></li>
+                            <li class="buy__now__btn"><button type="submit" class="btn btn-success">افزودن به سبد خرید</button></li>
+                            <li><a href="{% if object %}{% url 'add_to_favorite' slug=object.slug%}{% endif %}"><span class="ti-heart"></span></a></li>
                             
                         </ul>
 
@@ -152,7 +152,7 @@
                     </div>
         
                     <div class="pro__social__share">
-                        <h6 class="rtl">قیمت ارزان تر سراغ دارید ؟ <a>اطلاع دهید</a></h6>
+                        <h6 class="rtl">قیمت ارزان تر سراغ دارید ؟ <a href="{%url 'Contact'%}">اطلاع دهید</a></h6>
                     </div>
                 </div>
             </div>
@@ -316,12 +316,13 @@
                             <h4 class="rating-title">لطفا نظر خود را وارد کنید</h4><br>
                             <h5 class="rating-title-2">امتیاز شما به این محصول</h5><br>
                             <div class="rating__list">
-                                {% ratings object %}
+                                {% if object is not None %}{% ratings object %}{% endif %}
                             </div>
                         </div>
                         <!-- End RAting Area -->
                         <div class="review__box rtl">
                             {% if review_form %}
+                                {% if request.user.is_authenticated %}
                                 <form id="review-form" method="POST">
                                     <div class="single-review-form">
                                         <div class="review-box name">
@@ -337,6 +338,7 @@
                                 </form>  
                             {% else %}
                             <h5>برای ثبت دیدگاه باید <a href="{% url 'tmart_account:login' %}">وارد</a> شوید</h5> 
+                            {% endif %}                             
                             {% endif %}                             
                         </div>
                     </div>

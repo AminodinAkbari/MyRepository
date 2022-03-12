@@ -18,9 +18,14 @@ class TestViews(TestCase):
 
 	def test_cart_user(self):
 		response = self.client.get(reverse('CartUser'))
-		self.assertEquals(response.status_code , 200)
+		self.assertEquals(response.status_code , 302)
 
 	def test_add_to_favorite(self):
 		Order.objects.create(owner = self.user,is_paid=False)
 		response = self.client.get(reverse('add_to_favorite' , args=['slug']))
+		self.assertEquals(response.status_code , 302)
+
+	def test_checkout(self):
+		Order.objects.create(owner = self.user,is_paid=False)
+		response = self.client.get(reverse('checkout'))
 		self.assertEquals(response.status_code , 302)

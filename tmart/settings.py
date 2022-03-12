@@ -180,3 +180,5 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAdminUser',
     ]
 }
+LOGIN_URL = 'tmart_account:login'
+LOGIN_REDIRECT_URL = 'tmart_account:login'

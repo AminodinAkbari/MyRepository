@@ -47,11 +47,19 @@
                                         <button type="submit" class="btn btn-success">اعمال کد تخفیف</button>
                                         {% endif %}
                                         </form>
-                                    </div>
+                                         </div>
+                                            {% if messages %}
+                                                {% for message in messages %}
+                                                    <strong class="rtl p-30 alert alert-danger">{{message}}</strong>
+                                                {% endfor %}
+                                            {% endif %}
+                                            
+                                   
 
                                 </div>
                                 <div class="col-md-4 col-sm-5 col-xs-12 rtl">
                                     <div class="cart_totals">
+
                                         <h2>ارزش سبد خرید شما</h2>
                                         <table>
                                             <tbody class="">
@@ -62,27 +70,74 @@
                                                     </td>
                                                 </tr>
                                                 
-                                                    {% if coupon is not None %}
+                                                    {% if open_order.coupon is not None %}
                                                     <h6 class="rtl alert alert-success">کد تخفیف وارد شده %{{open_order.coupon.discount}} از قیمت نهایی کم کرده است</h6>
                                                     {% endif %}
                                                 
                                                 <hr>
                                                 <tr class="order-total">
+                                                    
+                                                    {% if open_order.get_total_price > 0 %}
                                                     <th>جمع</th>
                                                     <td>
                                                         <strong><span class="amount">{{open_order.get_total_price}} تومان</span></strong>
                                                     </td>
+                                                    {% else %}
+                                                    <td>
+                                                        <strong><span class="amount">مشکلی در قیمت گذاری وجود دارد ، گزارش دهید</span></strong>
+                                                    </td>
+                                             {% endif %}
                                                 </tr>                                           
                                             </tbody>
                                         </table>
+                                    {% if open_order.get_total_price > 0 %}
                                         <div class="wc-proceed-to-checkout">
-                                            <a href="checkout.html">نهایی کردن خرید</a>
-                                        </div>
+                                            <a href="{% url 'checkout' %}">نهایی کردن خرید</a>
+                                               </div>
+                                    {% endif %}
                                     </div>
                                 </div>
                             </div>
-                         
                     </div>
+                    
+                    
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                        <h3 class="pt--100 rtl">تاریخچه سبد خرید شما</h3>
+                          <hr>    
+                            <div class="table-content table-responsive">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th class="product-thumbnail">تصویر محصول</th>
+                                            <th class="product-name">نام محصول</th>
+                                            <th class="product-price">قیمت</th>
+                                            <th class="product-quantity">تعداد</th>
+                                            <th class="product-subtotal">قیمت کل</th>
+                                            <th class="product-remove">وضعیت کنونی</th>
+                                            <th class="product-remove">زمان و تاریخ</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for item in passed_order %}
+                                            {% for i in item.orderdetail.all %}
+                                                <tr>
+                                                    <td class="product-thumbnail"><a><img src="{{i.product.image.url}}" alt="product img"></a></td>
+                                                    <td class="product-name rtl"><a href="{{i.product.get_absolute_url}}">{{i.product.title}}</a></td>
+                                                    <td class="product-price"><span class="amount">{{i.product.price_with_discount}}</span></td>
+                                                    <td class="product-quantity"><h5>{{i.count}}</h5></td>
+                                                    <td class="product-subtotal">{{i.get_total_price}}</td>
+                                            {% endfor %}
+                                            {% for checkout in item.checkout.all %}
+                                                    <td class="product-remove">{{checkout.get_status_display}}</td>
+                                            {% endfor %}
+                                            <td class="product-remove">{{item.paymant_date}}</td>
+                                                </tr>
+                                            
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                 </div>
             </div>
         </div>

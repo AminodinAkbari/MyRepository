@@ -1,0 +1,65 @@
+<div class="filter__wrap">
+                        <div class="filter__cart">
+                            <div class="filter__cart__inner">
+                                <div class="filter__menu__close__btn">
+                                    <a href="#"><i class="zmdi zmdi-close"></i></a>
+                                </div>
+                                <div class="filter__content">
+                                    <!-- Start Single Content -->
+                                    <div class="fiter__content__inner text-right">
+                                        <div class="single__filter">
+                                            <h4 class="rtl">مرتب کردن بر اساس :</h4>
+                                            <hr>
+                                            <ul class="filter__list">
+                                                {% for filters in filters %}
+                                                <li><a href="#default">{{filters}}</a></li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                        <!--<div class="single__filter">
+                                            <h2>Size</h2>
+                                            <ul class="filter__list">
+                                                <li><a href="#xxl">XXL</a></li>
+                                                <li><a href="#xl">XL</a></li>
+                                                <li><a href="#x">X</a></li>
+                                                <li><a href="#l">L</a></li>
+                                                <li><a href="#m">M</a></li>
+                                                <li><a href="#s">S</a></li>
+                                            </ul>
+                                        </div>-->
+                                        <div class="single__filter text-right">
+                                            <h4 class="rtl">برچسب ها :</h4>
+                                            <hr>
+                                            <ul class="filter__list">
+                                                {% for tag in tags %}
+                                                <li><a href="#">{{tag}}</a></li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                        <div class="single__filter text-right">
+                                            <h4 class="rtl">قیمت ها :</h4>
+                                            <hr>
+                                            <ul class="filter__list">
+                                                <li><a href="#">$0.00 - $50.00</a></li>
+                                                <li><a href="#">$50.00 - $100.00</a></li>
+                                                <li><a href="#">$100.00 - $150.00</a></li>
+                                                <li><a href="#">$150.00 - $200.00</a></li>
+                                                <li><a href="#">$300.00 - $500.00</a></li>
+                                                <li><a href="#">$500.00 - $700.00</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="single__filter">
+                                            <h4>بر اسا رنگبندی</h4>
+                                            <hr>
+                                            <ul class="filter__list sidebar__list text-right">
+                                                {% for color in colors %}
+                                                    <li class="black"><a href="#">{{color}}</a></li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <!-- End Single Content -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>

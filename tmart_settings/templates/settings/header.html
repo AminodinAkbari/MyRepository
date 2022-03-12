@@ -21,7 +21,7 @@
                                         <li class="drop"><a href="/all_discount">بیشتر از %50 درصد تخفیف</a>
                                             <ul class="dropdown mega_dropdown" dir="ltr">
                                             {% for item in context.offers %}
-                                                <li><a class="mega__title" href="{{item.set.get_absolute_url}}">{{item.set}}</a>
+                                                <li><a class="mega__title" href="{% url 'tmart_Product:set_with_id' id=item.set.id %}">{{item.set}}</a>
                                                     <ul class="mega__item">
                                                         <li><a href="{{item.get_absolute_url}}">{{item.title|truncatewords:5}}</a></li>
                                                     </ul>
@@ -33,7 +33,7 @@
                                                     <ul class="mega__item">
                                                         <li>
                                                             <div class="mega-item-img">
-                                                                <a href="{{context.set_image.get_absolute_url}}">
+                                                                <a href="{% url 'tmart_Product:set_with_id' id=context.set_image.id %}">
                                                                     <img width="190px" src="{{context.set_image.hot_subcategory_banner.url}}" alt="{{context.set_image.title_fa}}">
                                                                 </a>
                                                             </div>

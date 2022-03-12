@@ -47,36 +47,41 @@ class ProductSearch(ListView):
         return SingleProduct.objects.all()
 
 
-class ProductDetail(DetailView):
-    model = SingleProduct
-    template_name = 'Products_templates/ProductDetail.html'
-    def get_context_data(self, **kwargs):
-        if self.request.user.is_authenticated:
-            user_product_view(self.object.id , self.request.user)
-        if self.object.features:
-            features = self.object.features.split(',')
-        features = None
+def ProductDetail(request, slug):
+    try:
+        object = SingleProduct.objects.get(slug = slug)
+    except:
+        object = None
 
-        try:
-            category = Category.objects.get(subcategory__set__singleproduct = self.object)
-        except Category.DoesNotExist:
-            category = None
+    if request.user.is_authenticated:
+        user_product_view(object.id , request.user)
+    if object.features:
+        features = object.features.split(',')
+    features = None
 
-        review_form = False
-        if self.request.user.is_authenticated:
-            if not Review.objects.filter(product = self.object , user = self.request.user).exists():
-                review_form = ReviewForm(self.request.POST or None)
-                if review_form.is_valid():
-                    comment = review_form.cleaned_data.get('comment')
-                    user = self.request.user
-                    Review.objects.create(product = self.object , user = user , comment = comment)
+    try:
+        category = Category.objects.get(subcategory__set__singleproduct = object)
+    except Category.DoesNotExist:
+        category = None
 
-        context = super().get_context_data(**kwargs)
-        context['gallery']      = singleProductGallery.objects.filter(product=self.object)
-        context['features']     = features
-        context['review_form']  = review_form
-        context['all_reviews']  = Review.objects.filter(product = self.object)
-        context['related']      = SingleProduct.objects.filter(tags__singleproduct = self.object).exclude(id = self.object.id).distinct()[:10]
-        context['category']     = category
-        
-        return context
+    review_form = None
+    if request.user.is_authenticated:
+        if not Review.objects.filter(product = object , user = request.user).exists():
+            review_form = ReviewForm(request.POST or None)
+            if review_form.is_valid():
+                comment = review_form.cleaned_data.get('comment')
+                user = request.user
+                Review.objects.create(product = object , user = user , comment = comment)
+                review_form = None
+
+
+    context = {
+    'gallery'    : singleProductGallery.objects.filter(product=object),
+    'features'   :features,
+    'review_form':review_form,
+    'all_reviews':Review.objects.filter(product = object),
+    'related'    :SingleProduct.objects.filter(tags__singleproduct = object).exclude(id = object.id).distinct()[:10],
+    'category'   :category,
+    'object':object
+    }
+    return render(request , 'Products_templates/ProductDetail.html' , context)

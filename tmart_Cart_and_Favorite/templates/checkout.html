@@ -1,0 +1,83 @@
+{% extends 'Base.html' %}
+{% load static %}
+{% block content %}
+    <section class="our-checkout-area ptb--120 bg__white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-lg-8">
+                        <div class="ckeckout-left-sidebar">
+                            <!-- Start Checkbox Area -->
+                            <form method="post">
+                                {% csrf_token %}
+                                <div class="checkout-form rtl">
+                                <h2 class="section-title-3">اطلاعات پستی</h2>
+                                <div class="checkout-form-inner">
+                                    <div class="single-checkout-box">
+                                        {{forms.address}}
+                                        {{forms.zipcode}}
+                                    </div>
+                                </div>
+                                <button class="btn btn-success" type="submit">پرداخت</button>
+                            </div>
+                            </form>
+                            <!-- End Checkbox Area -->
+                            <!-- Start Payment Box -->
+                            <!--<div class="payment-form">
+                                <h2 class="section-title-3">payment details</h2>
+                                <p>Lorem ipsum dolor sit amet, consectetur kgjhyt</p>
+                                <div class="payment-form-inner">
+                                    <div class="single-checkout-box">
+                                        <input type="text" placeholder="Name on Card*">
+                                        <input type="text" placeholder="Card Number*">
+                                    </div>
+                                    <div class="single-checkout-box select-option">
+                                        <select>
+                                            <option>Date*</option>
+                                            <option>Date</option>
+                                            <option>Date</option>
+                                            <option>Date</option>
+                                            <option>Date</option>
+                                        </select>
+                                        <input type="text" placeholder="Security Code*">
+                                    </div>
+                                </div>
+                            </div>-->
+                            <!-- End Payment Box -->
+                            <!-- Start Payment Way -->
+                            <hr>
+                            <div class="our-payment-sestem rtl">
+                                <h2 class="section-title-3">خرید بین المللی با :</h2>
+                                <ul class="payment-menu">
+                                    <li><a href="#"><img src="{% static 'tmart/images/payment/1.jpg' %}" alt="payment-img"></a></li>
+                                    <li><a href="#"><img src="{% static 'tmart/images/payment/2.jpg' %}" alt="payment-img"></a></li>
+                                    <li><a href="#"><img src="{% static 'tmart/images/payment/3.jpg' %}" alt="payment-img"></a></li>
+                                    <li><a href="#"><img src="{% static 'tmart/images/payment/4.jpg' %}" alt="payment-img"></a></li>
+                                    <li><a href="#"><img src="{% static 'tmart/images/payment/5.jpg' %}" alt="payment-img"></a></li>
+                                </ul>   
+                            </div>
+                            <!-- End Payment Way -->
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-4 rtl">
+                        <div class="checkout-right-sidebar">
+                            <div class="our-important-note">
+                                <h2 class="section-title-3">اطلاعات سبد خرید</h2><br>
+                                <!--<p class="note-desc">Lorem ipsum dolor sit amet, consectetur adipisici elit, sed do eiusmod tempor incididunt ut laborekf et dolore magna aliqua.</p>-->
+                                <ul class="important-note">
+                                    
+                                    <li class="alert alert-success"><i class="zmdi zmdi-caret-right-circle"></i> کل مبلغ پرداختی : <strong>{{open_order.get_total_price}}</strong> تومان</li>
+                                    
+                                    <li class="alert alert-success"><i class="zmdi zmdi-caret-right-circle"></i> شماره تلفن شما : {{user.username}}</a></li>
+                                </ul>
+                            </div>
+                            <div class="puick-contact-area mt--60">
+                                <h4 class="p-30">در صورت وجود مشکل در اطلاعات فوق با این شماره تماس بگیرید</h4>
+                                <a href="" dir="ltr">+012 345 678 102 </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Checkout Area -->
+{% endblock %}

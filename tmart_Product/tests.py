@@ -18,16 +18,16 @@ class TestUrls(TestCase):
         self.assertEquals(resolve(url).func.view_class , AllProducts)
 
     def test_set(self):
-        url = reverse('tmart_Product:set_with_id')
+        url = reverse('tmart_Product:set_with_id' , args = [1])
         self.assertEquals(resolve(url).func.view_class , SelectedSet)
 
     def test_search(self):
         url = reverse('tmart_Product:search')
         self.assertEquals(resolve(url).func.view_class , ProductSearch)
 
-    def test_set(self):
+    def test_product_detail(self):
         url = reverse('tmart_Product:ProductDetail' , args=['slug'])
-        self.assertEquals(resolve(url).func.view_class , ProductDetail)
+        self.assertEquals(resolve(url).func , ProductDetail)
 
 class TestViews(TestCase):
 

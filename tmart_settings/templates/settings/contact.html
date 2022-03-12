@@ -4,11 +4,18 @@
         <!-- Start Contact Area -->
         <section class="htc__contact__area ptb--120 bg__white">
             <div class="container">
+
+                {% if messages%}
+                    {% for message in messages %}
+                            <h2 class="alret alert-success text-center">{{message}}<br></h2><br>
+                    {% endfor %}
+                {% endif %}
+
                 <div class="row">
                     <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
                         <div class="htc__contact__container">
                             <div class="htc__contact__address">
-                                <h2 class="contact__title">اطلاعات تماس</h2>
+                                <h2 class="contact__title text-right">اطلاعات تماس</h2>
                                 <div class="contact__address__inner">
                                     <!-- Start Single Adress -->
                                     <div class="single__contact__address">
@@ -44,29 +51,29 @@
                                     <!-- End Single Adress -->
                                 </div>
                             </div>
+                            <hr>
                             <div class="contact-form-wrap">
                             <div class="contact-title">
-                                <h2 class="contact__title">Get In Touch</h2>
+                                <h2 class="contact__title rtl">فرم تماس با ما</h2>
                             </div>
-                            <form id="contact-form" action="mail.php" method="post">
-                                <div class="single-contact-form">
-                                    <div class="contact-box name">
-                                        <input type="text" name="name" placeholder="Your Nme*">
-                                        <input type="email" name="email" placeholder="Mail*">
-                                    </div>
-                                </div>
+                            <form action="" method="post" id="test" enctype="multipart/form-data">
+                                {% csrf_token %}
                                 <div class="single-contact-form">
                                     <div class="contact-box subject">
-                                        <input type="text" name="subject" placeholder="Subject*">
+                                        {{form.subject}}
                                     </div>
                                 </div>
                                 <div class="single-contact-form">
                                     <div class="contact-box message">
-                                        <textarea name="message"  placeholder="Massage*"></textarea>
+                                        {{form.message}}
                                     </div>
                                 </div>
                                 <div class="contact-btn">
-                                    <button type="submit" class="fv-btn">SEND</button>
+                                    {% if user.is_authenticated %}
+                                        <button type="submit" class="fv-btn">ارسال بازخورد</button>
+                                    {% else %}
+                                        <p class="alert alert-warning">برای ارسال پیام به ما باید <a href="tmart_account:login">وارد</a> شوید</p>
+                                    {% endif %}
                                 </div>
                             </form>
                         </div> 
