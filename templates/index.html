@@ -36,7 +36,7 @@
                             <div class="category-menu-list">
                                 <ul>                           
                                     {% for category in category %}
-                                        <li><a href="#"><img alt="" src="{% static 'tmart/images/icons/map.png' %}"> {{category.name}} <i class="zmdi zmdi-chevron-right"></i></a>
+                                        <li><a href="{% if category is not None %}{% url 'tmart_Product:category_with_id' id=category.id %}{% endif %}"><img alt="" src="{% static 'tmart/images/icons/map.png' %}"> {{category.name}} <i class="zmdi zmdi-chevron-right"></i></a>
                                             <div class="category-menu-dropdown">
                                             {% for subcategory in category.subcategory.all %}
                                             

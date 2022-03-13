@@ -28,7 +28,7 @@
                                 </div>
 
                                 <div class="addtocart-btn">
-                                    <a href="/product_details/{{item.slug}}">مشاهده با جزئیات کامل</a>
+                                    <a href="{% url 'tmart_Product:ProductDetail' slug=item.slug %}">مشاهده با جزئیات کامل</a>
                                 </div>
                             </div><!-- .product-info -->
                         </div><!-- .modal-product -->

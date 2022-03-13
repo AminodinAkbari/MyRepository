@@ -45,14 +45,40 @@
                     <!-- End Product MEnu -->
                     <div class="row">
                         <div class="product__list another-product-style">
+                            {% if page_obj|length > 0 %}
                             <!-- Start Single Product -->
                             {% for item in page_obj %}
                                 {% include 'products_templates/product_component.html' %}
                             {% endfor %}
                             <!-- End Single Product -->
+                            {% else %}
+                            <h3 class="alert alert-warning">هنوز محصولی به این دسته بندی اضافه نشده</h3>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
+                <hr>
+                {% if page_obj|length > 0 %}
+                        <nav aria-label="...">
+                          <ul class="pagination">
+                            {% if page_obj.has_previous %}
+                            <li class=""><a href="?page={{ page_obj.previous_page_number }}" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                            {% endif %}
+
+                            {% for page in paginator.page_range %}
+                            {% if page == page_obj.number%}
+                                <li class="active"><a href="?page={{page}}">{{page}} <span class="sr-only">(current)</span></a></li>
+                            {% else %}
+                                <li class=""><a href="?page={{page}}">{{page}} <span class="sr-only">(current)</span></a></li>
+                            {% endif %}
+                            {% endfor %}
+                            
+                            {% if page_obj.has_next %}
+                            <li class=""><a href="?page={{ page_obj.next_page_number }}" aria-label="Nexts"><span aria-hidden="true">&raquo;</span></a></li>
+                            {% endif %}
+                          </ul>
+                        </nav>
+                {% endif %}
             </div>
         </section>
         <!-- End Our Product Area -->
