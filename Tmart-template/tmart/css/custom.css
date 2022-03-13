@@ -12,7 +12,16 @@
 .rtl{
   direction: rtl !important;
 }
+.p-10{
+  padding:0px 30px 0px 10px;
+}
 .p-30{
   padding: 30px;
   line-height: 26px;
+}
+.border-left-1{
+  border-left: 1px solid #000;
+}
+.web-color{
+  color:#ff4136
 }

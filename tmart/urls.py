@@ -4,11 +4,13 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 from .views import  Home
+from Documentation.views import DocsList
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', Home.as_view() , name = 'Home'),
     path('ratings/', include('star_ratings.urls', namespace='ratings')),
+    path('docs/' , include('Documentation.urls')),
     path('', include('tmart_Product.urls')),
     path('', include('tmart_account.urls')),
     path('', include('tmart_settings.urls')),

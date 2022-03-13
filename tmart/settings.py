@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'tmart_settings',
     'tmart_account',
     'tmart_Cart_and_Favorite',
+    'Documentation',
 
 
     #pip
