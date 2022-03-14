@@ -166,7 +166,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR/"static/product_images/"
 
 # STATIC_URL = '/static/'
-# STATIC_ROOT ="static/static_root"
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # MEDIA_URL = '/media/'
 # MEDIA_ROOT ="static/product_images/"
 
