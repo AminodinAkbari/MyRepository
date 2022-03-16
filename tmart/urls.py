@@ -18,14 +18,7 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
 ]
 
-from .API_views import (
-    SingleProductPriceRangeAPI,
-    AllSingleProducts,
-    SpecificSingleProducts,
-    SingleProductsBySet,
-    SingleProductsByColors,
-    MostViewedSingleProducts
-)
+from .API_views import *
 # REST-APIS
 urlpatterns+=[
     path('product_price_range' , SingleProductPriceRangeAPI.as_view()),
@@ -34,6 +27,13 @@ urlpatterns+=[
     path('single_products_by_set/<int:set_id>' , SingleProductsBySet.as_view()),
     path('single_products_by_colors/<color>' , SingleProductsByColors.as_view()),
     path('most_viewed_products' , MostViewedSingleProducts.as_view()),
+    path('single_products_by_tags/<tag>' , SingleProductsByTags.as_view()),
+
+    path('single_products_high_price' , SingleProducts_HighPrice.as_view()),
+    path('single_products_low_price' , SingleProducts_LowPrice.as_view()),
+    path('single_products_with_discount' , SingleProducts_WithDiscount.as_view()),
+
+
 ]
 
 if settings.DEBUG:
